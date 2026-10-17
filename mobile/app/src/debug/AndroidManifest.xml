@@ -1,3 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <instrumentation android:name="in.itantra.mobile.DeviceSmokeTest" android:targetPackage="in.itantra.mobile" android:label="iTantra developer smoke tests" />
+    <instrumentation android:name="in.itantra.mobile.DeviceSmokeTest" android:targetPackage="in.itantra.mobile" android:label="SWAR developer smoke tests" />
 </manifest>

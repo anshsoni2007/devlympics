@@ -1,4 +1,4 @@
-# iTantra mobile audit and one-hour delivery plan
+# SWAR mobile audit and one-hour delivery plan
 
 ## Audit (completed before implementation)
 

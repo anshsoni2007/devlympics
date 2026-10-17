@@ -1,8 +1,8 @@
-# GPT Astra Prompt — iTantra Mobile Emergency Communication MVP
+# GPT Astra Prompt — SWAR Mobile Emergency Communication MVP
 
 You are an expert AI systems architect, mobile engineer, networking engineer, ML engineer, and hackathon product engineer.
 
-I am building **iTantra — Indian Multilingual TTS & STT Aided Neural Transceiver Radio Access for Low-Bitrate Links**.
+I am building **SWAR — Indian Multilingual TTS & STT Aided Neural Transceiver Radio Access for Low-Bitrate Links**.
 
 The current project/specification is oriented around a web/backend prototype, but the actual MVP must now become a **mobile emergency communication application**.
 
@@ -12,7 +12,7 @@ Your job is to **audit the existing repository first, then re-architect and impl
 
 # 1. PRODUCT VISION
 
-iTantra is an AI-assisted emergency communication system designed to make speech more efficient and resilient over constrained communication links.
+SWAR is an AI-assisted emergency communication system designed to make speech more efficient and resilient over constrained communication links.
 
 The conceptual pipeline is:
 
@@ -46,7 +46,7 @@ The MVP should be **transcript-first semantic radio**, not a fake end-to-end neu
 
 The system must clearly distinguish:
 
-- iTantra configured payload bitrate
+- SWAR configured payload bitrate
 - actual network bitrate
 - protocol overhead
 - packet size
@@ -55,7 +55,7 @@ The system must clearly distinguish:
 - packet loss
 - recovered-message quality
 
-Do not claim that Wi-Fi/Bluetooth itself operates at the configured iTantra semantic bitrate.
+Do not claim that Wi-Fi/Bluetooth itself operates at the configured SWAR semantic bitrate.
 
 ---
 
@@ -363,9 +363,9 @@ Do not pretend it is a fully decentralized mesh if it is not.
 
 ---
 
-# 10. PRESERVE THE iTantra PROTOCOL
+# 10. PRESERVE THE SWAR PROTOCOL
 
-The existing iTantra semantic transport concept should remain the core of the communication layer.
+The existing SWAR semantic transport concept should remain the core of the communication layer.
 
 Use:
 
@@ -414,12 +414,12 @@ Support configurable semantic payload profiles such as:
 16 kbps
 ```
 
-These are **iTantra payload/semantic targets**, not claims about physical Wi-Fi or Bluetooth speed.
+These are **SWAR payload/semantic targets**, not claims about physical Wi-Fi or Bluetooth speed.
 
 Measure separately:
 
 ```text
-Configured iTantra bitrate
+Configured SWAR bitrate
 Actual transport bitrate
 Protocol overhead
 Effective payload bitrate
@@ -618,7 +618,7 @@ Required screens:
 
 Show:
 
-- iTantra logo/name
+- SWAR logo/name
 - Emergency Communication
 - Walkie-Talkie
 - Conversation Mode
@@ -849,7 +849,7 @@ Use this conceptual architecture:
                          │
                          ▼
 ┌────────────────────────────────┐
-│          iTantra Core          │
+│          SWAR Core          │
 │                                │
 │ VAD → STT → Tokenizer → ITP/1 │
 │ → CRC/FEC → Decode → TTS       │
@@ -1113,7 +1113,7 @@ Recommended demo:
 
 ### Step 1
 
-Launch iTantra on Phone A and Phone B.
+Launch SWAR on Phone A and Phone B.
 
 ### Step 2
 
@@ -1346,7 +1346,7 @@ Test Indian languages.
 
 ---
 
-## Phase 5 — iTantra Core
+## Phase 5 — SWAR Core
 
 Implement:
 
@@ -1568,7 +1568,7 @@ The most important design principle is:
 
 > **Do not just collect real-world communication data and display it inside an AI demo. Make the communication environment actually change how the system behaves.**
 
-For iTantra, this means:
+For SWAR, this means:
 
 ```text
 Real-world voice

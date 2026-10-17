@@ -62,7 +62,7 @@ class SpeechEngine(
     }
 
     companion object {
-        private const val TAG = "LinC_Speech"
+        private const val TAG = "SWAR_Speech"
 
         private fun json(vararg fields: Any?): JSONObject {
             val o = JSONObject()
@@ -79,7 +79,7 @@ class SpeechEngine(
 
     private val main = Handler(Looper.getMainLooper())
     private val asyncPool = Executors.newCachedThreadPool { r ->
-        Thread(r, "LinC-VoiceWorker").apply { isDaemon = true }
+        Thread(r, "SWAR-VoiceWorker").apply { isDaemon = true }
     }
 
     private val packsDir = File(activity.filesDir, "language-packs").apply {
@@ -87,11 +87,11 @@ class SpeechEngine(
     }
     private val persistentPacksDir = File(
         android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS),
-        "LinC_VoiceModels"
+        "SWAR_VoiceModels"
     )
     private val altPersistentPacksDir = File(
         android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS),
-        "LinC_Models"
+        "SWAR_Models"
     )
 
     private var listening = false
@@ -130,13 +130,13 @@ class SpeechEngine(
                             .build()
                         tts?.setAudioAttributes(audioAttrs)
                         tts?.setSpeechRate(1.0f)
-                        Log.i("LinC_TTS", "Android TextToSpeech engine initialized successfully")
+                        Log.i("SWAR_TTS", "Android TextToSpeech engine initialized successfully")
                     } else {
-                        Log.w("LinC_TTS", "Android TextToSpeech engine failed with status $status")
+                        Log.w("SWAR_TTS", "Android TextToSpeech engine failed with status $status")
                     }
                 }
             } catch (t: Throwable) {
-                Log.w("LinC_TTS", "Could not initialize TextToSpeech: ${t.message}")
+                Log.w("SWAR_TTS", "Could not initialize TextToSpeech: ${t.message}")
             }
         }
 
@@ -369,7 +369,7 @@ class SpeechEngine(
                 conn.instanceFollowRedirects = true
                 conn.connectTimeout = 15000
                 conn.readTimeout = 30000
-                conn.setRequestProperty("User-Agent", "LinC-Android/1.0")
+                conn.setRequestProperty("User-Agent", "SWAR-Android/1.0")
 
                 code = conn.responseCode
                 if (code == HttpURLConnection.HTTP_MOVED_PERM || code == HttpURLConnection.HTTP_MOVED_TEMP || code == 307 || code == 308) {
@@ -728,7 +728,7 @@ class SpeechEngine(
                     }
                 }
             }
-        }, "LinC-AudioCapture")
+        }, "SWAR-AudioCapture")
         captureThread?.start()
     }
 
@@ -1230,7 +1230,7 @@ class SpeechEngine(
                 putInt(android.speech.tts.TextToSpeech.Engine.KEY_PARAM_STREAM, AudioManager.STREAM_ALARM)
                 putFloat(android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VOLUME, 1.0f)
             }
-            val utteranceId = "LinC_EMERGENCY_" + SystemClock.elapsedRealtime()
+            val utteranceId = "SWAR_EMERGENCY_" + SystemClock.elapsedRealtime()
             val res = tts?.speak(text, android.speech.tts.TextToSpeech.QUEUE_FLUSH, params, utteranceId)
             Log.i(TAG, "Emergency TTS spoken via STREAM_ALARM: '$text' (result=$res)")
             if (res == android.speech.tts.TextToSpeech.SUCCESS) {
@@ -1315,15 +1315,15 @@ class SpeechEngine(
                     tts?.language = Locale("hi", "IN")
                 }
             } catch (t: Throwable) {
-                Log.w("LinC_TTS", "Could not set TTS language: ${t.message}")
+                Log.w("SWAR_TTS", "Could not set TTS language: ${t.message}")
             }
             val params = Bundle().apply {
                 putInt(TextToSpeech.Engine.KEY_PARAM_STREAM, AudioManager.STREAM_MUSIC)
                 putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, 1.0f)
             }
-            val utteranceId = "LinC_" + SystemClock.elapsedRealtime()
+            val utteranceId = "SWAR_" + SystemClock.elapsedRealtime()
             val res = tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
-            Log.i("LinC_TTS", "Spoken via Android TextToSpeech in $targetLocale: '$text' (result=$res)")
+            Log.i("SWAR_TTS", "Spoken via Android TextToSpeech in $targetLocale: '$text' (result=$res)")
             if (res == TextToSpeech.SUCCESS) {
                 val durationMs = (text.length * 90L).coerceIn(1500L, 10000L)
                 Thread.sleep(durationMs)
@@ -1331,7 +1331,7 @@ class SpeechEngine(
             }
         }
 
-        Log.w("LinC_TTS", "Native TTS not ready/successful, falling back to PCM synthetic speech")
+        Log.w("SWAR_TTS", "Native TTS not ready/successful, falling back to PCM synthetic speech")
         playPcmFallback(text, lang)
     }
 

@@ -55,7 +55,7 @@
     <uses-feature android:name="android.hardware.microphone" android:required="true" />
 
     <application
-        android:label="LinC."
+        android:label="SWAR"
         android:icon="@drawable/ic_itantra"
         android:roundIcon="@mipmap/ic_itantra"
         android:theme="@android:style/Theme.Material.NoActionBar"

@@ -4,7 +4,7 @@ This is a new draft because the audit found no previous ITP implementation. It i
 
 ## Transport and CONTROL
 
-Two phones use a persistent direct TCP stream over local LAN or one phone's hotspot. A host listens on 8988 and advertises `_itantra._tcp.` through Android NSD. Manual private IPv4 entry is a discovery fallback. One peer is admitted at a time.
+Two phones use a persistent direct TCP stream over local LAN or one phone's hotspot. A host listens on 8988 and advertises `_swar._tcp.` through Android NSD. Manual private IPv4 entry is a discovery fallback. One peer is admitted at a time.
 
 Each frame is a four-byte big-endian unsigned length, then a one-byte kind, then a payload. Length includes the kind, must be 2..32768, and is checked before allocation. Kind 1 is UTF-8 JSON CONTROL. Kind 2 is FEC-encoded ITP. Reads consume the full frame and handle TCP fragmentation/coalescing.
 

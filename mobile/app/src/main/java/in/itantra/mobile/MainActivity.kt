@@ -121,6 +121,7 @@ class MainActivity : Activity() {
             settings.allowFileAccess = false
             settings.allowContentAccess = false
             settings.blockNetworkLoads = true
+            addJavascriptInterface(Bridge(), "SWAR")
             addJavascriptInterface(Bridge(), "iTantra")
             addJavascriptInterface(Bridge(), "LinC")
             webChromeClient = object : android.webkit.WebChromeClient() {
@@ -133,7 +134,8 @@ class MainActivity : Activity() {
                 override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean = true
 
                 override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse {
-                    if ("https://app.itantra.local/" == request.url.toString()) {
+                    val reqUrl = request.url.toString()
+                    if ("https://app.swar.local/" == reqUrl || "https://app.itantra.local/" == reqUrl) {
                         try {
                             return WebResourceResponse("text/html", "UTF-8", assets.open("index.html"))
                         } catch (ignored: IOException) {}
@@ -203,7 +205,7 @@ class MainActivity : Activity() {
             registerReceiver(commandReceiver, cmdFilter)
         }
 
-        web?.loadUrl("https://app.itantra.local/")
+        web?.loadUrl("https://app.swar.local/")
     }
 
     private fun startSplashAnimation(finalX: Float, finalY: Float, fontSizePx: Float) {
@@ -214,7 +216,7 @@ class MainActivity : Activity() {
         val padTop = parentView?.paddingTop ?: 0
         val startX = (screenWidth / 2f) - padLeft
         val startY = (screenHeight / 2f) - padTop
-        val texts = arrayOf("ಲಿಂಕ್.", "ਲਿੰਕ.", "लिंक.", "லிங்க்.", "లింక్.", "লিংক.", "LinC.")
+        val texts = arrayOf("ಸ್ವರ", "ਸਵਰ", "स्वर", "ஸ்வர்", "స్వర్", "স্বর", "SWAR")
         val targetYsDp = floatArrayOf(-240f, -160f, -80f, 80f, 160f, 240f)
         val targetXsDp = floatArrayOf(-35f, 55f, -45f, 35f, -30f, 50f)
         val rotations = floatArrayOf(-8f, 5f, -10f, 4f, -6f, 8f)
@@ -648,7 +650,7 @@ class MainActivity : Activity() {
 
             override fun received(message: ItpPacket.Decoded) {
                 if (message.emergency()) {
-                    Log.i("LinC", "🚨 EMERGENCY message from peer: '${message.text()}', dispatching to emergency pipeline")
+                    Log.i("SWAR", "🚨 EMERGENCY message from peer: '${message.text()}', dispatching to emergency pipeline")
                     event(
                         "received",
                         LocalTransport.json(
@@ -661,7 +663,7 @@ class MainActivity : Activity() {
                     )
                     runOnUiThread { speech.receiveEmergency(message) }
                 } else {
-                    Log.i("LinC", "MainActivity received message from peer: '${message.text()}', dispatching to TTS")
+                    Log.i("SWAR", "MainActivity received message from peer: '${message.text()}', dispatching to TTS")
                     event(
                         "received",
                         LocalTransport.json(
@@ -687,7 +689,7 @@ class MainActivity : Activity() {
                     }
                     startActivity(intent)
                 } catch (e: Exception) {
-                    Log.w("LinC", "Could not request ignore battery optimizations: ${e.message}")
+                    Log.w("SWAR", "Could not request ignore battery optimizations: ${e.message}")
                 }
             }
         }

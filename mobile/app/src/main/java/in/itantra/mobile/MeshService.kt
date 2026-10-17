@@ -26,8 +26,8 @@ import org.json.JSONObject
 class MeshService : Service(), LocalTransport.Listener {
 
     companion object {
-        private const val TAG = "LinC_MeshService"
-        const val CHANNEL_ID = "linc_mesh_channel"
+        private const val TAG = "SWAR_MeshService"
+        const val CHANNEL_ID = "swar_mesh_channel"
         const val NOTIFICATION_ID = 1001
 
         @Volatile
@@ -100,7 +100,7 @@ class MeshService : Service(), LocalTransport.Listener {
         sharedTransport?.let { t ->
             if (t.isConnected) {
                 t.disconnect()
-                updateNotification("LinC Standby", "Disconnected after 15 min inactive in background")
+                updateNotification("SWAR Standby", "Disconnected after 15 min inactive in background")
             }
         }
     }
@@ -153,10 +153,10 @@ class MeshService : Service(), LocalTransport.Listener {
         super.onCreate()
         instance = this
         isRunning = true
-        Log.i(TAG, "LinC Mesh Foreground Service created")
+        Log.i(TAG, "SWAR Mesh Foreground Service created")
 
         createNotificationChannel()
-        val initialNotification = buildNotification("LinC Mesh Active", "Offline peer-to-peer network ready")
+        val initialNotification = buildNotification("SWAR Mesh Active", "Offline peer-to-peer network ready")
         try {
             if (Build.VERSION.SDK_INT >= 29) {
                 startForeground(
@@ -196,12 +196,12 @@ class MeshService : Service(), LocalTransport.Listener {
     private fun acquireLocks() {
         try {
             val pm = getSystemService(Context.POWER_SERVICE) as? PowerManager
-            wakeLock = pm?.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "LinC:MeshServiceWakeLock")?.apply {
+            wakeLock = pm?.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "SWAR:MeshServiceWakeLock")?.apply {
                 setReferenceCounted(false)
                 acquire()
             }
             val wm = applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
-            wifiLock = wm?.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "LinC:MeshServiceWifiLock")?.apply {
+            wifiLock = wm?.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "SWAR:MeshServiceWifiLock")?.apply {
                 setReferenceCounted(false)
                 acquire()
             }
@@ -287,12 +287,12 @@ class MeshService : Service(), LocalTransport.Listener {
             val transportType = data.optString("transport", "wifi")
             if (st == "CONNECTED") {
                 val suffix = if (transportType == "bluetooth") " (Bluetooth RFCOMM)" else ""
-                updateNotification("LinC Connected$suffix", if (peerName.isNotEmpty()) "Connected to $peerName$suffix" else "Mesh connection active$suffix")
+                updateNotification("SWAR Connected$suffix", if (peerName.isNotEmpty()) "Connected to $peerName$suffix" else "Mesh connection active$suffix")
                 evaluateBackgroundTimer()
             } else if (st == "RECONNECTING") {
-                updateNotification("LinC Reconnecting", "Reconnecting to offline peer...")
+                updateNotification("SWAR Reconnecting", "Reconnecting to offline peer...")
             } else if (st == "STANDBY" || st == "DISCONNECTED") {
-                updateNotification("LinC Mesh Active", "Waiting for nearby peers...")
+                updateNotification("SWAR Mesh Active", "Waiting for nearby peers...")
                 timeoutHandler.removeCallbacks(backgroundDisconnectRunnable)
             }
         }
@@ -311,7 +311,7 @@ class MeshService : Service(), LocalTransport.Listener {
             if (message.emergency) {
                 triggerEmergencyAlert(message.text)
             } else {
-                updateNotification("LinC: New message", "${message.language.uppercase()}: ${message.text}")
+                updateNotification("SWAR: New message", "${message.language.uppercase()}: ${message.text}")
             }
         }
     }
@@ -361,7 +361,7 @@ class MeshService : Service(), LocalTransport.Listener {
         if (Build.VERSION.SDK_INT >= 26) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "LinC Mesh Network",
+                "SWAR Mesh Network",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
                 description = "Maintains persistent offline Wi-Fi Direct connection even when app is closed or screen is off"

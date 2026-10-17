@@ -15,7 +15,7 @@ export const ComparisonGauge: React.FC<ComparisonGaugeProps> = ({
 }) => {
   const [downloaded, setDownloaded] = useState(false);
   const pcmBps = 256000;
-  // Percentage of 256 kbps consumed by iTantra (e.g. 1000 / 256000 = ~0.39%)
+  // Percentage of 256 kbps consumed by SWAR (e.g. 1000 / 256000 = ~0.39%)
   const percentageOfPcm = actualWireBps > 0 ? (actualWireBps / pcmBps) * 100 : 0;
 
   const handleExportJson = () => {

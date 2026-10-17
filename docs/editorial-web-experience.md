@@ -1,4 +1,4 @@
-# iTantra editorial web experience
+# SWAR editorial web experience
 
 Run `npm run dev:web` from the repository root. Build with `npm run build:web`
 (TypeScript checking followed by Vite's production build).
@@ -17,7 +17,7 @@ The visible reference stays on its hero: a centered serif headline, restrained
 navigation, cream background, a loose grey transcription loop entering from the
 left, and an outlined waveform feeding a dark text ribbon towards the right.
 A small teal processing status appears and disappears while the text travels.
-There is no lower-page scrolling in the recording; the subsequent iTantra
+There is no lower-page scrolling in the recording; the subsequent SWAR
 sections extend this visual language using the user's written requirements.
 No reference branding, copy, images, or proprietary assets are included.
 

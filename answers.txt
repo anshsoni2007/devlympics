@@ -1,5 +1,5 @@
 ================================================================================
-OFFLINE MULTILINGUAL VOICE WALKIE-TALKIE (LinC / iTantra)
+OFFLINE MULTILINGUAL VOICE WALKIE-TALKIE (SWAR)
 BUILD SPEC CLARIFICATIONS & ENGINEERING ANSWERS
 ================================================================================
 
@@ -125,7 +125,7 @@ C. RAM Budget During Simultaneous Full-Duplex:
   1. During the BLE handshake, both devices perform an ephemeral X25519
      key exchange.
   2. A 6-digit numeric SAS code is derived using HKDF:
-     Code = HKDF-Expand(K_shared, "iTantra-SAS-Verify", 4) % 1000000.
+     Code = HKDF-Expand(K_shared, "SWAR-SAS-Verify", 4) % 1000000.
   3. Both devices display the code: "Pairing Code: 684 192 - Do both match?".
   4. Both users tap "Confirm" to complete mutual authentication and prevent
      Man-in-the-Middle (MitM) attacks.
@@ -171,7 +171,7 @@ C. RAM Budget During Simultaneous Full-Duplex:
   * Matches the physical softAP client limit of AOSP Wi-Fi Direct Group Owners.
 
 - BLE Fallback Behavior:
-  * Because iTantra transmits compact semantic text tokens (~50 bytes per
+  * Because SWAR transmits compact semantic text tokens (~50 bytes per
     utterance) rather than raw audio waveforms, BLE can carry the channel traffic.
   * When Wi-Fi Direct drops, the channel transitions to degraded BLE broadcast.
   * Partials are disabled; only finalized text messages are transmitted over BLE

@@ -97,12 +97,12 @@ object PayloadSecurity {
     }
 
     // --- HKDF SHA-256 for Deriving Session AEAD Key ---
-    fun deriveAeadKey(sharedSecret: ByteArray, salt: ByteArray = "iTantra-P2P-Salt".toByteArray()): ByteArray {
+    fun deriveAeadKey(sharedSecret: ByteArray, salt: ByteArray = "SWAR-P2P-Salt".toByteArray()): ByteArray {
         val mac = Mac.getInstance("HmacSHA256")
         mac.init(SecretKeySpec(salt, "HmacSHA256"))
         val prk = mac.doFinal(sharedSecret)
 
-        val info = "iTantra-ChaCha20Poly1305-Key".toByteArray()
+        val info = "SWAR-ChaCha20Poly1305-Key".toByteArray()
         val expandMac = Mac.getInstance("HmacSHA256")
         expandMac.init(SecretKeySpec(prk, "HmacSHA256"))
         expandMac.update(info)

@@ -148,9 +148,10 @@ def build():
 
     # 6. Copy to web public
     for dest in [
+        os.path.join(ROOT, r"apps\web\public\swar-debug.apk"),
+        os.path.join(ROOT, r"apps\web\public\swar.apk"),
         os.path.join(ROOT, r"apps\web\public\linc-debug.apk"),
         os.path.join(ROOT, r"apps\web\public\linc.apk"),
-        os.path.join(ROOT, r"apps\web\public\itantra-debug.apk"),
         os.path.join(APP_DIR, r"build\outputs\apk\debug\app-debug.apk")
     ]:
         try:

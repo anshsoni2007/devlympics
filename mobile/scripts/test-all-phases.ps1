@@ -1,4 +1,4 @@
-# LinC Multilingual Voice Walkie-Talkie - All Phases Verification Script
+# SWAR Multilingual Voice Walkie-Talkie - All Phases Verification Script
 $ErrorActionPreference = 'Stop'
 $mobileDir = Split-Path -Parent $PSScriptRoot
 
@@ -8,7 +8,7 @@ $kotlinc = "C:\Users\ROHIT\.kotlinc\kotlinc\bin\kotlinc.bat"
 $coroutinesJar = "C:\Users\ROHIT\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core-jvm\1.9.0\9beade4c1c1569e4f36cbd2c37e02e3e41502601\kotlinx-coroutines-core-jvm-1.9.0.jar"
 
 Write-Host "==========================================================================" -ForegroundColor Cyan
-Write-Host "LinC: Offline Multilingual Voice Walkie-Talkie - Full Build & Test Suite" -ForegroundColor Cyan
+Write-Host "SWAR: Offline Multilingual Voice Walkie-Talkie - Full Build & Test Suite" -ForegroundColor Cyan
 Write-Host "==========================================================================" -ForegroundColor Cyan
 
 Push-Location $mobileDir

@@ -1,18 +1,18 @@
 import { Router } from 'express';
 import { randomUUID, timingSafeEqual } from 'node:crypto';
-import { parseLogicalMessage, ItantraMessage } from './LogicalMessage.js';
+import { parseLogicalMessage, SwarMessage } from './LogicalMessage.js';
 
 /** Explicit network mode only. In-memory two-client relay; never used by acoustic Android transport. */
 export function websiteRelay(): Router {
   const router=Router();
-  type Entry={cursor:number;sender:string;message:ItantraMessage};
+  type Entry={cursor:number;sender:string;message:SwarMessage};
   type Room={token:string;clients:Set<string>;entries:Entry[];next:number;seen:Map<string,number>;touched:number};
   const rooms=new Map<string,Room>();
   router.use((_req,_res,next)=>{for(const [id,room] of rooms)if(Date.now()-room.touched>300000)rooms.delete(id);next();});
   router.post('/rooms',(_req,res)=>{
     if(rooms.size>=64){res.status(429).json({error:'Relay capacity reached'});return;}
     const id=randomUUID(),token=randomUUID();rooms.set(id,{token,clients:new Set(),entries:[],next:0,seen:new Map(),touched:Date.now()});
-    res.json({roomId:id,token,path:`/api/v1/itantra/rooms/${id}`,expiresAfterIdleMs:300000});
+    res.json({roomId:id,token,path:`/api/v1/swar/rooms/${id}`,expiresAfterIdleMs:300000});
   });
   router.use('/rooms/:id',(req,res,next)=>{
     const room=rooms.get(req.params.id);const token=req.headers.authorization?.replace(/^Bearer /,'') ?? '';

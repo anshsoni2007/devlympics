@@ -1,4 +1,4 @@
-# Offline Voice Bridge (LinC / iTantra)
+# Offline Voice Bridge (SWAR)
 
 This document describes the native Android offline voice bridge implementation in `mobile/offline`, built according to [final.md](../final.md) and [answers.txt](../answers.txt).
 

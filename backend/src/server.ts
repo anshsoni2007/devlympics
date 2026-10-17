@@ -46,6 +46,7 @@ export function createVoiceBridgeServer(port: number = 3001): ServerInstance {
   app.use(cors());
   app.use(express.json({ limit: '15mb' }));
   app.use(express.urlencoded({ extended: true, limit: '15mb' }));
+  app.use('/api/v1/swar', websiteRelay());
   app.use('/api/v1/itantra', websiteRelay());
 
   const httpServer = http.createServer(app);

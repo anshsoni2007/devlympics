@@ -195,7 +195,7 @@ export const DeviceConnectionModal: React.FC<DeviceConnectionModalProps> = ({
     setIsSendingTest(true);
     setStatusMessage(null);
     try {
-      const ok = await onSendTestMessage('Node-to-node connection verified. iTantra active across devices.');
+      const ok = await onSendTestMessage('Node-to-node connection verified. SWAR active across devices.');
       if (ok) {
         setStatusMessage({ type: 'success', text: 'Voice test broadcasted! Receiving speakers will now speak the message.' });
       } else {
@@ -471,7 +471,7 @@ export const DeviceConnectionModal: React.FC<DeviceConnectionModalProps> = ({
                   }}>
                     <img
                       src={`https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent(tunnelUrl)}`}
-                      alt="Scan with Phone to open iTantra"
+                      alt="Scan with Phone to open SWAR"
                       style={{ width: '120px', height: '120px', display: 'block', borderRadius: '4px' }}
                     />
                   </div>
@@ -1149,7 +1149,7 @@ export const DeviceConnectionModal: React.FC<DeviceConnectionModalProps> = ({
                   Bluetooth Classic Tactical Architecture (RFCOMM Port 8992)
                 </h4>
                 <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, lineHeight: 1.5 }}>
-                  iTantra uses Bluetooth RFCOMM stream emulation to exchange 4-byte frames at an ultra-compact 1,850 bps bitrate. This guarantees full tactical voice functionality even when Wi-Fi is completely jammed or turned off for battery conservation.
+                  SWAR uses Bluetooth RFCOMM stream emulation to exchange 4-byte frames at an ultra-compact 1,850 bps bitrate. This guarantees full tactical voice functionality even when Wi-Fi is completely jammed or turned off for battery conservation.
                 </p>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px', marginTop: '4px' }}>
@@ -1180,10 +1180,10 @@ export const DeviceConnectionModal: React.FC<DeviceConnectionModalProps> = ({
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ padding: '16px', borderRadius: '12px', background: 'rgba(99, 102, 241, 0.08)', border: '1px solid rgba(99, 102, 241, 0.2)' }}>
                 <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#ffffff', marginBottom: '6px' }}>
-                  What is iTantra?
+                  What is SWAR?
                 </h3>
                 <p style={{ fontSize: '12px', color: '#cbd5e1', lineHeight: 1.6 }}>
-                  iTantra is an offline tactical voice communications system. Instead of streaming heavy raw PCM voice audio (which consumes 32,000 bytes every second and requires high-speed broadband), iTantra converts spoken phrases into compact semantic tokens and transmits them in tiny 4-byte frames over local Wi-Fi Direct, Wi-Fi LAN, or Bluetooth. The receiving device resynthesizes natural voice audio locally with zero internet dependency.
+                  SWAR is an offline tactical voice communications system. Instead of streaming heavy raw PCM voice audio (which consumes 32,000 bytes every second and requires high-speed broadband), SWAR converts spoken phrases into compact semantic tokens and transmits them in tiny 4-byte frames over local Wi-Fi Direct, Wi-Fi LAN, or Bluetooth. The receiving device resynthesizes natural voice audio locally with zero internet dependency.
                 </p>
               </div>
 
@@ -1231,7 +1231,7 @@ export const DeviceConnectionModal: React.FC<DeviceConnectionModalProps> = ({
                   <span style={{ color: '#fbbf24', fontFamily: 'var(--font-mono)' }}>24,000 - 64,000 bps</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#94a3b8', padding: '4px 0' }}>
-                  <span style={{ fontWeight: 600, color: '#34d399' }}>iTantra Semantic Framing:</span>
+                  <span style={{ fontWeight: 600, color: '#34d399' }}>SWAR Semantic Framing:</span>
                   <span style={{ color: '#34d399', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>1,850 bps (99.2% Savings)</span>
                 </div>
               </div>

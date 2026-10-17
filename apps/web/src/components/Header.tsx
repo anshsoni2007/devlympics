@@ -59,8 +59,8 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           onClick={() => handleNavClick('hero')}
           className="logo-btn"
-          aria-label="iTantra Home"
-          title="iTantra Offline Voice Communication"
+          aria-label="SWAR Home"
+          title="SWAR Offline Voice Communication"
         >
           <svg viewBox="0 0 100 100" style={{ width: '28px', height: '28px' }}>
             <circle cx="50" cy="50" r="46" fill="#ffffff" />
@@ -168,9 +168,9 @@ export const Header: React.FC<HeaderProps> = ({
             className="download-apk-btn"
             target={apkDownloadUrl.startsWith('http') ? '_blank' : undefined}
             rel={apkDownloadUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-            download={!apkDownloadUrl.startsWith('http') ? 'linc-debug.apk' : undefined}
-            title="Download LinC Android Demo APK"
-            aria-label="Download LinC Android Demo APK"
+            download={!apkDownloadUrl.startsWith('http') ? 'swar-debug.apk' : undefined}
+            title="Download SWAR Android Demo APK"
+            aria-label="Download SWAR Android Demo APK"
           >
             <Download size={14} className="download-apk-icon" />
             <span className="download-apk-text">Download APK</span>
@@ -305,9 +305,9 @@ export const Header: React.FC<HeaderProps> = ({
                 className="mobile-apk-download-btn"
                 target={apkDownloadUrl.startsWith('http') ? '_blank' : undefined}
                 rel={apkDownloadUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-                download={!apkDownloadUrl.startsWith('http') ? 'linc-debug.apk' : undefined}
+                download={!apkDownloadUrl.startsWith('http') ? 'swar-debug.apk' : undefined}
                 onClick={() => setMobileMenuOpen(false)}
-                title="Download LinC Android Demo APK"
+                title="Download SWAR Android Demo APK"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Download size={15} color="#34d399" />

@@ -10,7 +10,7 @@ export default async function handler(req: any, res: any) {
   }
 
   // If external live backend is configured in Vercel environment variables, proxy to it
-  const backendUrl = process.env.BACKEND_URL || process.env.ITANTRA_API_URL;
+  const backendUrl = process.env.BACKEND_URL || process.env.SWAR_API_URL || process.env.ITANTRA_API_URL;
   if (backendUrl) {
     try {
       const target = `${backendUrl.replace(/\/$/, '')}/api/v1/runs`;

@@ -1,18 +1,18 @@
-# iTantra Wire Profiles & Semantic Radio Pacing Specifications
-# Protocol: ITP/1 (Indian Multilingual TTS & STT Aided Neural Transceiver Radio Access)
+# SWAR Wire Profiles & Semantic Radio Pacing Specifications
+# Protocol: ITP/1 (Semantic Wireless Audio Relay / Transceiver Access)
 # Reference: Section 11 & Section 20 of agent.md
 
 version: "1.0.0"
 protocol: "ITP/1"
 description: >
   Defines low-bitrate semantic payload pacing profiles and framing parameters
-  for physical emergency communications. These denote iTantra configured
+  for physical emergency communications. These denote SWAR configured
   semantic payload targets, distinct from raw Wi-Fi/Hotspot PHY/MAC bitrates.
 
 # Global framing and transport constants
 global_transport:
   port: 8988
-  service_type: "_itantra._tcp."
+  service_type: "_swar._tcp."
   length_field_bytes: 4
   kind_field_bytes: 1
   kind_control: 1

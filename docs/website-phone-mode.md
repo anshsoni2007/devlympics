@@ -1,28 +1,28 @@
 # Explicit website ↔ phone mode
 
-The existing website/backend prototype remains separate from acoustic phone-to-phone operation. A browser-compatible HTTP relay is mounted at `/api/v1/itantra` in Express. Android `WebsiteTransport` uses HTTPS polling and is instantiated only when the user explicitly selects Website in the connection drawer. No acoustic message is sent to this service. TLS certificate validation remains enabled and redirects are refused. Serve the backend behind a trusted HTTPS endpoint for a physical phone; HTTP loopback is used only by the automated relay test.
+The existing website/backend prototype remains separate from acoustic phone-to-phone operation. A browser-compatible HTTP relay is mounted at `/api/v1/swar` in Express. Android `WebsiteTransport` uses HTTPS polling and is instantiated only when the user explicitly selects Website in the connection drawer. No acoustic message is sent to this service. TLS certificate validation remains enabled and redirects are refused. Serve the backend behind a trusted HTTPS endpoint for a physical phone; HTTP loopback is used only by the automated relay test.
 
 The shared logical schema is validated in Java `LogicalMessage` and TypeScript `protocol/LogicalMessage.ts`:
 
 ```json
-{"type":"ITANTRA_MESSAGE","sessionId":"e67daac2-195f-4567-91d4-94c908ab1954","sequence":42,"language":"hi","encoding":"text_v1","payload":"मदद चाहिए","timestamp":0}
+{"type":"SWAR_MESSAGE","sessionId":"e67daac2-195f-4567-91d4-94c908ab1954","sequence":42,"language":"hi","encoding":"text_v1","payload":"मदद चाहिए","timestamp":0}
 ```
 
 The acoustic path encodes the same session/sequence/language/text through unchanged ITP/1. Website transport uses JSON; the semantic message does not depend on FSK or sockets.
 
-Create a room using `POST /api/v1/itantra/rooms`. It returns `roomId`, a bearer `token`, and `path`. Join two clients using `POST {path}/join` with `{clientId: "a random UUID"}` and the header `Authorization: Bearer TOKEN`. Construct the Android connection link as `https://YOUR_HOST{path}#TOKEN` and paste it in the existing connection field after selecting Website. The fragment is parsed locally, removed from requests and sent as the authorization header. Do not publish this link; it grants room access.
+Create a room using `POST /api/v1/swar/rooms`. It returns `roomId`, a bearer `token`, and `path`. Join two clients using `POST {path}/join` with `{clientId: "a random UUID"}` and the header `Authorization: Bearer TOKEN`. Construct the Android connection link as `https://YOUR_HOST{path}#TOKEN` and paste it in the existing connection field after selecting Website. The fragment is parsed locally, removed from requests and sent as the authorization header. Do not publish this link; it grants room access.
 
 The browser uses the same endpoints:
 
 ```js
 const clientId = crypto.randomUUID();
-const room = await (await fetch('/api/v1/itantra/rooms', {method:'POST'})).json();
+const room = await (await fetch('/api/v1/swar/rooms', {method:'POST'})).json();
 const headers = {'Content-Type':'application/json', Authorization:`Bearer ${room.token}`};
 await fetch(room.path+'/join', {method:'POST', headers, body:JSON.stringify({clientId})});
 // Copy `${location.origin}${room.path}#${room.token}` to the phone connection field.
 // Once both clients have joined:
 await fetch(room.path+'/messages', {method:'POST', headers, body:JSON.stringify({clientId,
-  message:{type:'ITANTRA_MESSAGE', sessionId:room.roomId, sequence:1,
+  message:{type:'SWAR_MESSAGE', sessionId:room.roomId, sequence:1,
     language:'en', encoding:'text_v1', payload:'Hello phone', timestamp:Date.now()}})});
 let cursor=0;
 async function poll() {

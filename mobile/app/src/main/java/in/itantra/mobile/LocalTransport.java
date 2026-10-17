@@ -37,8 +37,8 @@ import java.security.SecureRandom;
  * Automatically switches to Bluetooth RFCOMM if Wi-Fi link drops, keeping speech flowing seamlessly.
  */
 public final class LocalTransport {
-    private static final String TAG = "LocalTransport";
-    public static final UUID LINC_BT_UUID = UUID.fromString("6a4b1234-9876-4321-b1c2-123456789abc");
+    public static final UUID SWAR_BT_UUID = UUID.fromString("6a4b1234-9876-4321-b1c2-123456789abc");
+    public static final UUID LINC_BT_UUID = SWAR_BT_UUID;
 
     public interface Listener {
         void event(String type, JSONObject data);
@@ -193,18 +193,18 @@ public final class LocalTransport {
         this.listener = listener;
         nsd = (NsdManager) context.getSystemService(Context.NSD_SERVICE);
         WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        multicast = wifi.createMulticastLock("linc-discovery");
+        multicast = wifi.createMulticastLock("swar-discovery");
         multicast.setReferenceCounted(false);
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        wakeLock = pm != null ? pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "LinC:MeshWakeLock") : null;
+        wakeLock = pm != null ? pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "SWAR:MeshWakeLock") : null;
         if (wakeLock != null) wakeLock.setReferenceCounted(false);
-        wifiLock = wifi.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "LinC:MeshWifiLock");
+        wifiLock = wifi.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "SWAR:MeshWifiLock");
         wifiLock.setReferenceCounted(false);
 
         BluetoothManager bm = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = bm != null ? bm.getAdapter() : BluetoothAdapter.getDefaultAdapter();
 
-        android.content.SharedPreferences prefs = context.getSharedPreferences("linc_transport_prefs", Context.MODE_PRIVATE);
+        android.content.SharedPreferences prefs = context.getSharedPreferences("swar_transport_prefs", Context.MODE_PRIVATE);
         String savedP2p = prefs.getString("last_peer_p2p", "");
         if (isValidP2pAddress(savedP2p)) {
             lastPeerP2p = savedP2p;
@@ -354,9 +354,9 @@ public final class LocalTransport {
         if (closed || btServer != null || bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) return;
         io.execute(() -> {
             try {
-                BluetoothServerSocket server = bluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord("LinC_Voice_Bridge", LINC_BT_UUID);
+                BluetoothServerSocket server = bluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord("SWAR_Voice_Bridge", SWAR_BT_UUID);
                 btServer = server;
-                Log.i(TAG, "Bluetooth RFCOMM Server listening with UUID " + LINC_BT_UUID);
+                Log.i(TAG, "Bluetooth RFCOMM Server listening with UUID " + SWAR_BT_UUID);
                 while (!closed && btServer == server) {
                     BluetoothSocket client = server.accept();
                     if (client == null) continue;
@@ -550,7 +550,7 @@ public final class LocalTransport {
     public static boolean isPhoneName(String name) {
         if (name == null || name.trim().isEmpty()) return false;
         String s = name.toLowerCase(Locale.US);
-        if (s.startsWith("linc") || s.startsWith("itantra")) return true;
+        if (s.startsWith("swar") || s.startsWith("linc") || s.startsWith("itantra")) return true;
         return s.contains("phone") || s.contains("mobile") || s.contains("handset") ||
                s.contains("realme") || s.contains("motorola") || s.contains("moto ") ||
                s.contains("samsung") || s.contains("galaxy") || s.contains("pixel") ||
@@ -684,16 +684,16 @@ public final class LocalTransport {
                 BluetoothDevice device = bluetoothAdapter.getRemoteDevice(targetAddr);
                 BluetoothSocket clientSocket = null;
 
-                // Attempt 1: Insecure RFCOMM with LinC UUID (bypasses pairing prompts)
+                // Attempt 1: Insecure RFCOMM with SWAR UUID (bypasses pairing prompts)
                 try {
-                    clientSocket = device.createInsecureRfcommSocketToServiceRecord(LINC_BT_UUID);
+                    clientSocket = device.createInsecureRfcommSocketToServiceRecord(SWAR_BT_UUID);
                     clientSocket.connect();
                     Log.i(TAG, "Insecure RFCOMM connection established to " + targetAddr);
                 } catch (Exception e1) {
                     Log.w(TAG, "Insecure RFCOMM failed: " + e1.getMessage() + "; trying Secure RFCOMM...");
-                    // Attempt 2: Secure RFCOMM with LinC UUID
+                    // Attempt 2: Secure RFCOMM with SWAR UUID
                     try {
-                        clientSocket = device.createRfcommSocketToServiceRecord(LINC_BT_UUID);
+                        clientSocket = device.createRfcommSocketToServiceRecord(SWAR_BT_UUID);
                         clientSocket.connect();
                         Log.i(TAG, "Secure RFCOMM connection established to " + targetAddr);
                     } catch (Exception e2) {
@@ -1115,7 +1115,7 @@ public final class LocalTransport {
 
     public void persistPeerInfo(String p2p, String addr, String callsign, String btAddr, String btName) {
         try {
-            android.content.SharedPreferences.Editor ed = context.getSharedPreferences("linc_transport_prefs", Context.MODE_PRIVATE).edit();
+            android.content.SharedPreferences.Editor ed = context.getSharedPreferences("swar_transport_prefs", Context.MODE_PRIVATE).edit();
             if (isValidP2pAddress(p2p)) {
                 lastPeerP2p = p2p;
                 ed.putString("last_peer_p2p", p2p);
@@ -1343,7 +1343,7 @@ public final class LocalTransport {
                     DatagramPacket packet = new DatagramPacket(buf, buf.length);
                     udp.receive(packet);
                     String msg = new String(packet.getData(), 0, packet.getLength(), StandardCharsets.UTF_8);
-                    if (msg.startsWith("LINC_BEACON:")) {
+                    if (msg.startsWith("SWAR_BEACON:") || msg.startsWith("LINC_BEACON:")) {
                         String[] parts = msg.split(":");
                         if (parts.length >= 4) {
                             String beaconSession = parts[2];
@@ -1353,7 +1353,7 @@ public final class LocalTransport {
                             String senderIp = packet.getAddress() != null ? packet.getAddress().getHostAddress() : "";
                             if (!beaconP2p.isEmpty()) lastPeerP2p = beaconP2p;
                             if (!session.toString().equals(beaconSession) && !isSelfAddress(senderIp)) {
-                                Log.i(TAG, "Discovered LinC peer via UDP beacon: " + beaconCallsign + " (" + senderIp + ")" + (!beaconP2p.isEmpty() ? " [p2p:" + beaconP2p + "]" : ""));
+                                Log.i(TAG, "Discovered SWAR peer via UDP beacon: " + beaconCallsign + " (" + senderIp + ")" + (!beaconP2p.isEmpty() ? " [p2p:" + beaconP2p + "]" : ""));
                                 if (!beaconP2p.isEmpty()) {
                                     event("peer", "name", beaconCallsign, "model", beaconModel, "address", senderIp, "p2pAddress", beaconP2p, "port", 8988, "source", "beacon");
                                 } else {
@@ -1384,7 +1384,7 @@ public final class LocalTransport {
         io.execute(() -> {
             try {
                 String p2pSuffix = (myP2pAddress != null && !myP2pAddress.isEmpty()) ? ":" + myP2pAddress : "";
-                String payloadStr = "LINC_BEACON:8988:" + session.toString() + ":" + callsign + ":" + Build.MODEL + p2pSuffix;
+                String payloadStr = "SWAR_BEACON:8988:" + session.toString() + ":" + callsign + ":" + Build.MODEL + p2pSuffix;
                 byte[] payload = payloadStr.getBytes(StandardCharsets.UTF_8);
                 DatagramSocket sender = new DatagramSocket();
                 sender.setBroadcast(true);
@@ -2046,8 +2046,8 @@ public final class LocalTransport {
         if (registration != null) return;
         NsdServiceInfo info = new NsdServiceInfo();
         String nodeName = callsign != null && !callsign.isEmpty() ? callsign : Build.MODEL;
-        info.setServiceName("LinC-" + nodeName.replaceAll("[^a-zA-Z0-9-]", "") + "-" + session.toString().substring(0, 4));
-        info.setServiceType("_itantra._tcp.");
+        info.setServiceName("SWAR-" + nodeName.replaceAll("[^a-zA-Z0-9-]", "") + "-" + session.toString().substring(0, 4));
+        info.setServiceType("_swar._tcp.");
         info.setPort(8988);
         registration = new NsdManager.RegistrationListener() {
             public void onServiceRegistered(NsdServiceInfo i) { Log.i(TAG, "mDNS Service registered: " + i.getServiceName()); }
@@ -2100,7 +2100,7 @@ public final class LocalTransport {
                 public void onStartDiscoveryFailed(String t, int e) { event("error", "message", "Discovery failed; use the host address shown on the other phone."); }
                 public void onStopDiscoveryFailed(String t, int e) {}
             };
-            nsd.discoverServices("_itantra._tcp.", NsdManager.PROTOCOL_DNS_SD, discovery);
+            nsd.discoverServices("_swar._tcp.", NsdManager.PROTOCOL_DNS_SD, discovery);
         } catch (Exception e) {
             event("error", "message", "Discovery unavailable: " + e.getMessage());
         }

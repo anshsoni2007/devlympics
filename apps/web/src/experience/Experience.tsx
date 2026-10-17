@@ -39,9 +39,9 @@ function Navigation() {
   return (
     <div className="navigation-anchor">
       <header className="site-header">
-        <a href="#home" className="brand" aria-label="LinC home">
+        <a href="#home" className="brand" aria-label="SWAR home">
           <BrandMark />
-          <span>LinC</span>
+          <span>SWAR</span>
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -55,8 +55,8 @@ function Navigation() {
         <a
           className="nav-apk-btn"
           href={DEFAULT_APK_DOWNLOAD_URL}
-          download={DEFAULT_APK_DOWNLOAD_URL.startsWith('/') ? 'linc-debug.apk' : undefined}
-          title="Download LinC Android APK"
+          download={DEFAULT_APK_DOWNLOAD_URL.startsWith('/') ? 'swar-debug.apk' : undefined}
+          title="Download SWAR Android APK"
         >
           <ArrowDown size={15} strokeWidth={2.5} />
           <span>Download APK</span>
@@ -98,7 +98,7 @@ function Navigation() {
             <a
               href={DEFAULT_APK_DOWNLOAD_URL}
               className="mobile-apk-download-btn"
-              download={DEFAULT_APK_DOWNLOAD_URL.startsWith('/') ? 'linc-debug.apk' : undefined}
+              download={DEFAULT_APK_DOWNLOAD_URL.startsWith('/') ? 'swar-debug.apk' : undefined}
             >
               <ArrowDown size={16} strokeWidth={2.5} /> Download APK (v1.0)
             </a>
@@ -236,7 +236,7 @@ function TechnologySection() {
       <div className="technology-gallery-pin">
         <div className="technology-gallery-header">
           <div className="section-topline">
-            <span className="eyebrow">01 / HOW LinC WORKS</span>
+            <span className="eyebrow">01 / HOW SWAR WORKS</span>
             <div className="gallery-step-indicator">
               <span className="step-count">STAGE 0{activeStage + 1} / 04</span>
               <div className="step-bars" aria-label={`Stage ${activeStage + 1} of 4`}>
@@ -413,7 +413,7 @@ function MobileAppSection() {
           <em>Zero towers needed.</em>
         </h2>
         <p>
-          Live captures of the LinC Android app operating completely offline.
+          Live captures of the SWAR Android app operating completely offline.
           From radar peer discovery to instant push-to-talk, devices form an encrypted peer-to-peer
           mesh over Wi-Fi Direct and Bluetooth Classic without internet or cellular connectivity.
         </p>
@@ -565,7 +565,7 @@ function MobileAppSection() {
           <a
             href={DEFAULT_APK_DOWNLOAD_URL}
             className="button button-primary download-pill-btn"
-            download={DEFAULT_APK_DOWNLOAD_URL.startsWith('/') ? 'linc-debug.apk' : undefined}
+            download={DEFAULT_APK_DOWNLOAD_URL.startsWith('/') ? 'swar-debug.apk' : undefined}
           >
             <ArrowDown size={15} /> Download Android APK
           </a>
@@ -670,34 +670,34 @@ function DemoSection() {
 
 const faqs = [
   {
-    q: 'How does LinC transmit voice without internet or cellular network?',
+    q: 'How does SWAR transmit voice without internet or cellular network?',
     tag: 'OFFLINE MESH',
-    a: "LinC bypasses cellular towers and internet service providers entirely. It establishes direct device-to-device radio links using Android's native Wi-Fi Direct (P2P), local Wi-Fi LAN sockets (TCP port 8988 / UDP 8989), and Bluetooth Classic RFCOMM (port 8992). Nearby smartphones discover each other automatically and communicate in an ad-hoc local mesh."
+    a: "SWAR bypasses cellular towers and internet service providers entirely. It establishes direct device-to-device radio links using Android's native Wi-Fi Direct (P2P), local Wi-Fi LAN sockets (TCP port 8988 / UDP 8989), and Bluetooth Classic RFCOMM (port 8992). Nearby smartphones discover each other automatically and communicate in an ad-hoc local mesh."
   },
   {
-    q: 'How does LinC achieve 98% bandwidth reduction?',
+    q: 'How does SWAR achieve 98% bandwidth reduction?',
     tag: 'AI COMPRESSION',
-    a: 'Traditional voice applications stream continuous acoustic waveforms (such as Opus or PCM) requiring 64,000 to 256,000 bits/sec, which drops when signal strength is low. LinC performs on-device speech-to-text recognition via AI4Bharat IndicConformer, compressing sentences into ultra-compact semantic tokens (~1.8 kbps). A 50KB voice recording shrinks into a ~50-byte ITP/1 packet that transmits reliably even under extreme packet loss.'
+    a: 'Traditional voice applications stream continuous acoustic waveforms (such as Opus or PCM) requiring 64,000 to 256,000 bits/sec, which drops when signal strength is low. SWAR performs on-device speech-to-text recognition via AI4Bharat IndicConformer, compressing sentences into ultra-compact semantic tokens (~1.8 kbps). A 50KB voice recording shrinks into a ~50-byte ITP/1 packet that transmits reliably even under extreme packet loss.'
   },
   {
     q: 'Which Indian languages and scripts are supported?',
     tag: 'INDIC AI',
-    a: 'LinC supports 22 Indian languages including Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, and Indian English. It natively processes regional accents and mixed-language speech (such as Hinglish code-switching), ensuring seamless communication for multi-state disaster rescue teams.'
+    a: 'SWAR supports 22 Indian languages including Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, and Indian English. It natively processes regional accents and mixed-language speech (such as Hinglish code-switching), ensuring seamless communication for multi-state disaster rescue teams.'
   },
   {
     q: 'What is the physical range between phones offline?',
     tag: 'RANGE & RELAY',
-    a: 'Direct peer-to-peer Wi-Fi Direct links achieve 80 to 120 meters line-of-sight outdoors, while Bluetooth Classic spans 20 to 30 meters through light obstacles. In an emergency mesh deployment, LinC packets hop across intermediate devices (multi-hop store-and-forward relay), extending voice coverage across entire disaster response sectors.'
+    a: 'Direct peer-to-peer Wi-Fi Direct links achieve 80 to 120 meters line-of-sight outdoors, while Bluetooth Classic spans 20 to 30 meters through light obstacles. In an emergency mesh deployment, SWAR packets hop across intermediate devices (multi-hop store-and-forward relay), extending voice coverage across entire disaster response sectors.'
   },
   {
-    q: 'Does LinC require special hardware or root access?',
+    q: 'Does SWAR require special hardware or root access?',
     tag: 'ACCESSIBILITY',
-    a: 'No special hardware or root access is needed. LinC runs on standard, off-the-shelf Android smartphones (Android 9.0 Pie or higher). No external antennas or proprietary radios are required; it leverages the built-in Wi-Fi and Bluetooth chipsets already in every responder’s pocket.'
+    a: 'No special hardware or root access is needed. SWAR runs on standard, off-the-shelf Android smartphones (Android 9.0 Pie or higher). No external antennas or proprietary radios are required; it leverages the built-in Wi-Fi and Bluetooth chipsets already in every responder’s pocket.'
   },
   {
     q: 'How do I download and install the app on my Android device?',
     tag: 'INSTALLATION',
-    a: 'Click the "Download APK" button in the navigation bar to download linc-debug.apk directly to your phone. Open the APK, allow installation from your browser or file manager if prompted, grant microphone and location/nearby permissions, and your device is ready to connect offline.'
+    a: 'Click the "Download APK" button in the navigation bar to download swar-debug.apk directly to your phone. Open the APK, allow installation from your browser or file manager if prompted, grant microphone and location/nearby permissions, and your device is ready to connect offline.'
   }
 ];
 
@@ -718,7 +718,7 @@ function FaqSection() {
     >
       <div className="section-topline">
         <span className="eyebrow">05 / FREQUENTLY ASKED QUESTIONS</span>
-        <span className="eyebrow">EVERYTHING ABOUT LinC</span>
+        <span className="eyebrow">EVERYTHING ABOUT SWAR</span>
       </div>
       <h2>
         Built with clarity.
@@ -776,7 +776,7 @@ function ClosingSection() {
           className="button button-primary"
           download={
             DEFAULT_APK_DOWNLOAD_URL.startsWith('/')
-              ? 'linc-debug.apk'
+              ? 'swar-debug.apk'
               : undefined
           }
         >
@@ -796,7 +796,7 @@ function SiteFooter() {
       <div className="footer-upper">
         <a href="#home" className="brand">
           <BrandMark />
-          <span>LinC</span>
+          <span>SWAR</span>
         </a>
         <p>
           Indian Multilingual Offline Voice Communication System over Wi-Fi
@@ -807,7 +807,7 @@ function SiteFooter() {
           className="text-link"
           download={
             DEFAULT_APK_DOWNLOAD_URL.startsWith('/')
-              ? 'linc-debug.apk'
+              ? 'swar-debug.apk'
               : undefined
           }
         >
@@ -815,7 +815,7 @@ function SiteFooter() {
         </a>
       </div>
       <div className="footer-lower">
-        <span>© 2026 LinC Project</span>
+        <span>© 2026 SWAR Project</span>
         <span>Zero infrastructure · 1.8 kbps semantic speech · Open protocol</span>
         <a href="#home">Back to top ↑</a>
       </div>

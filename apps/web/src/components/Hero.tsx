@@ -75,12 +75,12 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted, onOpenDevices, connect
 
         {/* Headline (Exact July Dot-Matrix Typography & Entrance Animation) */}
         <h1 className="headline">
-          <span className="headline-line line-1">Meet iTantra</span>
+          <span className="headline-line line-1">Meet SWAR</span>
         </h1>
 
         {/* Subhead */}
         <p className="subhead anim" style={{ '--d': '0.28s' } as React.CSSProperties}>
-          iTantra is an offline voice-communication system transmitting compact text frames over local Wi-Fi Direct, Wi-Fi LAN, and Bluetooth Classic with local speech-to-text and synthetic voice playback.
+          SWAR is an offline voice-communication system transmitting compact text frames over local Wi-Fi Direct, Wi-Fi LAN, and Bluetooth Classic with local speech-to-text and synthetic voice playback.
         </p>
 
         {/* 3-Step Visual Quick Flow Guide */}
@@ -183,7 +183,7 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted, onOpenDevices, connect
         </div>
       </div>
 
-      {/* Stats Footer (4 Metrics matching iTantra communication data) */}
+      {/* Stats Footer (4 Metrics matching SWAR communication data) */}
       <footer className="stats-footer">
         <div className="stat-card anim" style={{ '--d': '0.5s' } as React.CSSProperties}>
           <div className="stat-icon">&lt;</div>

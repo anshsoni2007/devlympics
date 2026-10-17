@@ -41,6 +41,6 @@ Raw local debug logs are in the ignored `mobile/build/physical-tests/` directory
 
 ## Integration provenance and limits
 
-The mobile HTML/CSS, icons, and LinC branding come from GitHub `origin/main` commit `8324091`. Acoustic Java, speech gating/model checks, backend relay additions, and validation scripts are local work. Existing web HTML/CSS edits were preserved. The Pixel's differently signed original app was preserved; the test package installs alongside it.
+The mobile HTML/CSS, icons, and SWAR branding come from GitHub `origin/main` commit `8324091`. Acoustic Java, speech gating/model checks, backend relay additions, and validation scripts are local work. Existing web HTML/CSS edits were preserved. The Pixel's differently signed original app was preserved; the test package installs alongside it.
 
 Pending: repeated trials at fixed conditions; 0.5/1/2/3/5 m tests; noise/orientation/obstruction trials; Hindi and Hinglish human speech; independently timed STT/TTS/end-to-end latency; measured model memory and accuracy on a labeled corpus; continuous conversation feedback tests; USB-disconnected confirmation; deployed HTTPS phone/browser interoperability. No kilometer range, kilobit acoustic payload rate, or broad reliability claim is supported.

@@ -1,4 +1,4 @@
-# iTantra: install and test the phone-only demo
+# SWAR: install and test the phone-only demo
 
 ## Build and install
 
@@ -16,7 +16,7 @@ Install the same APK on the OnePlus 11R and Pixel 9a. USB installation requires 
 
 ## Prepare offline speech before disabling internet
 
-1. Open iTantra > Dashboard on each phone.
+1. Open SWAR > Dashboard on each phone.
 2. Check whether **On-device recognizer** is available. If unavailable, speech cannot run in this build; there is deliberately no cloud fallback.
 3. Select Hindi on Walkie, then use **Prepare offline model** on Dashboard if needed. Repeat for English. Downloads depend on the installed Android recognizer. **Recheck installed speech** displays reported installed languages; service availability alone is not proof of Hindi support.
 4. Open **TTS voice settings**, install Hindi and English voice data using the device's speech engine controls, and recheck. Only voices marked as not requiring a network are used.
@@ -29,7 +29,7 @@ Android's strictly on-device recognition factory is used, not a generic recogniz
 1. Disable mobile data on both phones. Disconnect from external Wi-Fi. Keep Wi-Fi/hotspot radios enabled; airplane mode may disable the hotspot.
 2. Enable a password-protected hotspot on Phone A. Connect Phone B to it. Accept “stay connected” if Android warns the network has no internet.
 3. On Phone A: Nearby > **Host a local session**. Note its address and six-digit joining code.
-4. On Phone B: Nearby > **Find nearby iTantra phones**. Tap Phone A, enter its code, and Connect. If discovery finds nothing, enter the private IPv4 address displayed on A. Some hotspots suppress multicast discovery.
+4. On Phone B: Nearby > **Find nearby SWAR phones**. Tap Phone A, enter its code, and Connect. If discovery finds nothing, enter the private IPv4 address displayed on A. Some hotspots suppress multicast discovery.
 5. Both apps should show CONNECTED. Send a typed message first, check the receiving transcript and decoded ACK. This proves only the transport path.
 6. Select English, press and hold the microphone, say “Help is needed at the main gate,” and release. Verify that the receiver shows your actual words and plays speech. No default phrase is substituted if recognition fails.
 7. Reverse direction. Repeat in Hindi: “मुख्य द्वार पर मदद चाहिए।” Try Hinglish: “Main gate पर help चाहिए.” Judge what the phones actually recognize.

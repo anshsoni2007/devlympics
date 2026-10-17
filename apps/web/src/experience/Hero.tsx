@@ -159,7 +159,7 @@ export function Hero() {
       </MotionContext.Provider>
       <div className="hero-copy">
         <p className="eyebrow hero-eyebrow">
-          <span className="status-dot" /> LinC — OFFLINE AI VOICE & MESH
+          <span className="status-dot" /> SWAR — OFFLINE AI VOICE & MESH
         </p>
         <h1>
           When networks fail,
