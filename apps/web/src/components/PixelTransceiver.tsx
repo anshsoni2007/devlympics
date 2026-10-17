@@ -199,24 +199,25 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
     };
   }, [screenMode]);
 
+  const [playbackSpeed, setPlaybackSpeed] = useState<1 | 2>(1);
+
   // Audio Equalizer bars animation when talking
   useEffect(() => {
-    if (!isTalking && !isPeerSpeaking) return;
+    if (!isTalking && !isPeerSpeaking && screenMode !== 'talking') return;
+    const intervalMs = playbackSpeed === 2 ? 45 : 90;
     const interval = setInterval(() => {
       setEqLevels(prev =>
         prev.map(() => Math.floor(Math.random() * 42) + 8)
       );
-    }, 90);
+    }, intervalMs);
     return () => clearInterval(interval);
-  }, [isTalking, isPeerSpeaking]);
+  }, [isTalking, isPeerSpeaking, screenMode, playbackSpeed]);
 
-  // Handle Starting and Stopping Push-To-Talk
+  // Handle Starting and Stopping Push-To-Talk (Center button for every page)
   const handleToggleTalk = () => {
     sound.playClick();
     if (!connectedPeer) {
-      // If not connected, switch to device screen first
-      setScreenMode('devices');
-      return;
+      setConnectedPeer(MOCK_PEERS[0]);
     }
 
     if (isTalking) {
@@ -258,7 +259,7 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
     }, 1800);
   };
 
-  // Simulate peer receiving message & responding
+  // Simulate peer receiving message & responding with playbackSpeed support
   const simulatePeerResponse = () => {
     if (!connectedPeer) return;
     setTimeout(() => {
@@ -267,10 +268,10 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
       const responseText = `ROGER ${connectedPeer.name}: COPY THAT. LINK IS STABLE ON CHANNEL 1.`;
       setLiveTranscript(responseText);
 
-      // Play native SpeechSynthesis TTS
+      // Play native SpeechSynthesis TTS respecting 2X playback speed
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         const u = new SpeechSynthesisUtterance(responseText);
-        u.rate = 1.05;
+        u.rate = playbackSpeed === 2 ? 1.9 : 1.05;
         u.pitch = 0.95;
         u.onend = () => {
           setIsPeerSpeaking(false);
@@ -281,9 +282,9 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
         setTimeout(() => {
           setIsPeerSpeaking(false);
           setScreenMode('idle');
-        }, 3000);
+        }, playbackSpeed === 2 ? 1600 : 3000);
       }
-    }, 2200);
+    }, 2000);
   };
 
   // Quick Dispatch phrase send
@@ -321,23 +322,133 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
     }, 1800);
   };
 
-  // Click Wheel Button Handlers
-  const handleWheelDev = () => {
+  // Screen Navigation handlers (Top = UP, Bottom = DOWN)
+  const SCREENS: ScreenMode[] = ['devices', 'talking', 'idle'];
+
+  const handleNavigateUp = () => {
     sound.playClick();
-    setScreenMode(screenMode === 'devices' ? 'idle' : 'devices');
+    const currentIndex = SCREENS.indexOf(screenMode);
+    const nextIndex = (currentIndex - 1 + SCREENS.length) % SCREENS.length;
+    const targetMode = SCREENS[nextIndex];
+    setScreenMode(targetMode);
+    if (targetMode === 'talking') {
+      startTalking();
+    } else if (isTalking) {
+      stopTalking();
+    }
   };
 
-  const handleWheelTxt = () => {
+  const handleNavigateDown = () => {
     sound.playClick();
-    // Cycle through sample tactical phrases
-    const randomPhrase = TACTICAL_PHRASES[Math.floor(Math.random() * TACTICAL_PHRASES.length)];
-    handleSendPhrase(randomPhrase);
+    const currentIndex = SCREENS.indexOf(screenMode);
+    const nextIndex = (currentIndex + 1) % SCREENS.length;
+    const targetMode = SCREENS[nextIndex];
+    setScreenMode(targetMode);
+    if (targetMode === 'talking') {
+      startTalking();
+    } else if (isTalking) {
+      stopTalking();
+    }
   };
 
-  const handleWheelLanguage = () => {
-    sound.playClick();
-    setLanguageIdx((languageIdx + 1) % LANGUAGES.length);
+  // Talking Screen Controls: Rewind & 2X Speed
+  const handleRewind = () => {
+    sound.playRewind();
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    const cleanText = liveTranscript.replace(/█/g, '');
+    setLiveTranscript(`◄◄ REWIND: ${cleanText}█`);
+    setTimeout(() => {
+      setLiveTranscript(`${cleanText}█`);
+    }, 900);
   };
+
+  const handleToggleSpeed = () => {
+    const nextSpeed = playbackSpeed === 1 ? 2 : 1;
+    setPlaybackSpeed(nextSpeed);
+    sound.playSpeedToggle(nextSpeed);
+  };
+
+  // Keyboard navigation support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        handleNavigateUp();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        handleNavigateDown();
+      } else if (e.key === 'ArrowLeft' && screenMode === 'talking') {
+        e.preventDefault();
+        handleRewind();
+      } else if (e.key === 'ArrowRight' && screenMode === 'talking') {
+        e.preventDefault();
+        handleToggleSpeed();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [screenMode, playbackSpeed, isTalking]);
+
+  // Click Wheel Props per page based on requirements:
+  // 1) Push to talk is center button on every page, top and bottom are UP and DOWN
+  // 2) On talking screen: left is REWIND, right is 2X SPEED
+  // 3) On idle screen: remove every text from circular buttons except center
+  const getWheelButtonProps = () => {
+    if (screenMode === 'idle') {
+      return {
+        topText: '',
+        topAction: handleNavigateUp,
+        topTitle: 'Navigate to Talking Screen (UP)',
+        bottomText: '',
+        bottomAction: handleNavigateDown,
+        bottomTitle: 'Navigate to Devices Screen (DOWN)',
+        leftText: '',
+        leftAction: () => {},
+        leftTitle: '',
+        rightText: '',
+        rightAction: () => {},
+        rightTitle: '',
+      };
+    }
+
+    if (screenMode === 'talking') {
+      return {
+        topText: '▲ UP',
+        topAction: handleNavigateUp,
+        topTitle: 'Navigate to Available Devices (UP)',
+        bottomText: '▼ DOWN',
+        bottomAction: handleNavigateDown,
+        bottomTitle: 'Navigate to Idle Standby (DOWN)',
+        leftText: '◄ REWIND',
+        leftAction: handleRewind,
+        leftTitle: 'Rewind STT transcript and playback',
+        rightText: playbackSpeed === 2 ? '2X [ON]' : '2X SPEED',
+        rightAction: handleToggleSpeed,
+        rightTitle: 'Toggle 2X audio speed playback',
+      };
+    }
+
+    // screenMode === 'devices'
+    return {
+      topText: '▲ UP',
+      topAction: handleNavigateUp,
+      topTitle: 'Navigate to Idle Standby (UP)',
+      bottomText: '▼ DOWN',
+      bottomAction: handleNavigateDown,
+      bottomTitle: 'Navigate to Talking Screen (DOWN)',
+      leftText: '',
+      leftAction: () => {},
+      leftTitle: '',
+      rightText: '',
+      rightAction: () => {},
+      rightTitle: '',
+    };
+  };
+
+  const wheelProps = getWheelButtonProps();
 
   return (
     <div className="transceiver-page-wrapper">
@@ -456,8 +567,13 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
                   <>
                     <span className="status-dot-blink" style={{ backgroundColor: '#ef4444', boxShadow: '0 0 6px #ef4444' }} />
                     <span style={{ color: isPeerSpeaking ? '#38bdf8' : '#ef4444' }}>
-                      {isPeerSpeaking ? '● RX PEER' : '● TX LIVE'}
+                      {isPeerSpeaking ? '● RX PEER' : isTalking ? '● TX LIVE' : '● STT READY'}
                     </span>
+                    {playbackSpeed === 2 && (
+                      <span style={{ fontSize: '11px', background: 'var(--swar-phosphor)', color: 'var(--swar-phosphor-bg)', padding: '1px 4px', borderRadius: '2px', fontWeight: 900 }}>
+                        2X
+                      </span>
+                    )}
                   </>
                 ) : (
                   <>
@@ -478,7 +594,11 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
               {screenMode === 'devices'
                 ? isPairing ? pairingLog : 'SELECT NEARBY PEER TO CONNECT'
                 : screenMode === 'talking'
-                ? isPeerSpeaking ? `INCOMING AUDIO FROM ${connectedPeer?.name}` : 'VOICE ACTIVITY DETECTED • 1.8 KBPS'
+                ? isPeerSpeaking
+                  ? `INCOMING AUDIO FROM ${connectedPeer?.name}`
+                  : isTalking
+                  ? `VOICE ACTIVITY DETECTED • ${playbackSpeed === 2 ? '3.6 KBPS (2X)' : '1.8 KBPS'}`
+                  : `READY TO TRANSMIT • ${playbackSpeed === 2 ? 'SPEED: 2.0X' : 'SPEED: 1.0X'}`
                 : 'NO VOICE ACTIVITY'}
             </div>
 
@@ -546,8 +666,9 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
                 {/* Main Live Transcript Box */}
                 <div className="screen-transcript-box">
                   <div>
-                    <div className="transcript-label-mini">
-                      LIVE TRANSCRIPT (STT) • {isPeerSpeaking ? 'REMOTE RECEIVE' : 'LOCAL TRANSMIT'}
+                    <div className="transcript-label-mini" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span>LIVE TRANSCRIPT (STT) • {isPeerSpeaking ? 'REMOTE RECEIVE' : isTalking ? 'LOCAL TRANSMIT' : 'READY'}</span>
+                      {playbackSpeed === 2 && <span style={{ color: 'var(--swar-phosphor)', fontWeight: 700 }}>[2X ACTIVE]</span>}
                     </div>
                     <div className="transcript-body-text">
                       {liveTranscript}
@@ -556,9 +677,9 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
                   </div>
 
                   <div className="transcript-telemetry-meta">
-                    <span>WIRE: 1,850 BPS</span>
+                    <span>WIRE: {playbackSpeed === 2 ? '3,700 BPS (2X)' : '1,850 BPS'}</span>
                     <span>FEC: HAMMING(8,4) OK</span>
-                    <span>CRC: VERIFIED</span>
+                    <span>SPEED: {playbackSpeed}.0X</span>
                   </div>
                 </div>
               </>
@@ -594,62 +715,79 @@ export const PixelTransceiver: React.FC<PixelTransceiverProps> = ({ onBackToMain
 
             {/* Screen Bottom Telemetry Footer */}
             <div className="screen-footer-bar">
-              <span>{currentLanguage.code}</span>
+              <span
+                onClick={() => {
+                  sound.playClick();
+                  setLanguageIdx((languageIdx + 1) % LANGUAGES.length);
+                }}
+                style={{ cursor: 'pointer' }}
+                title={`Click to cycle language dialect (Current: ${currentLanguage.name})`}
+              >
+                {currentLanguage.code} ▾
+              </span>
               <span>{connectedPeer ? connectedPeer.name : 'NO PEER'}</span>
             </div>
           </div>
         </div>
 
         {/* ====================================================================
-            THE PHYSICAL CLICK WHEEL & CENTER BUTTON (Matches Reference Image)
+            THE PHYSICAL CLICK WHEEL & CENTER BUTTON (Matches User Requirements)
+            1) PUSH TO TALK in the centre button for every page
+            2) Top and bottom buttons as UP and DOWN to navigate screens
+            3) In talking(STT text) page: right is 2X SPEED and left is REWIND
+            4) In idle page: remove every text from circular buttons except center
             ==================================================================== */}
         <div className="click-wheel-container">
-          {/* Top Label: PUSH TO TALK */}
+          {/* Top Label: UP on talking/devices, Empty on idle */}
           <button
-            onClick={handleToggleTalk}
+            onClick={wheelProps.topAction}
             className="wheel-label-btn wheel-label-top"
-            title="Push to talk / Start transmission"
+            title={wheelProps.topTitle}
+            aria-label="Navigate Screen Up"
           >
-            PUSH TO TALK
+            {wheelProps.topText}
           </button>
 
-          {/* Left Label: DEV (Available Devices) */}
+          {/* Left Label: REWIND on talking, Empty on idle/devices */}
           <button
-            onClick={handleWheelDev}
+            onClick={wheelProps.leftAction}
             className="wheel-label-btn wheel-label-left"
-            title="View available devices to connect"
+            title={wheelProps.leftTitle}
+            aria-label="Rewind"
           >
-            DEV
+            {wheelProps.leftText}
           </button>
 
-          {/* Right Label: TXT (Quick Tactical Phrases) */}
+          {/* Right Label: 2X SPEED on talking, Empty on idle/devices */}
           <button
-            onClick={handleWheelTxt}
+            onClick={wheelProps.rightAction}
             className="wheel-label-btn wheel-label-right"
-            title="Dispatch quick tactical phrase"
+            title={wheelProps.rightTitle}
+            aria-label="Toggle 2X Speed"
           >
-            TXT
+            {wheelProps.rightText}
           </button>
 
-          {/* Bottom Label: ... (Change Language / Dialect) */}
+          {/* Bottom Label: DOWN on talking/devices, Empty on idle */}
           <button
-            onClick={handleWheelLanguage}
+            onClick={wheelProps.bottomAction}
             className="wheel-label-btn wheel-label-bottom"
-            title={`Switch language dialect (Current: ${currentLanguage.name})`}
+            title={wheelProps.bottomTitle}
+            aria-label="Navigate Screen Down"
           >
-            ...
+            {wheelProps.bottomText}
           </button>
 
-          {/* Center Circular Tactile Button */}
+          {/* Center Circular Tactile Button: PUSH TO TALK on EVERY page */}
           <button
             onClick={handleToggleTalk}
             className={`wheel-center-btn ${isTalking ? 'is-active' : ''}`}
-            title="Tap to start / stop speaking"
-            aria-label="Push To Talk Microphone"
+            title="Push to talk / Tap to toggle voice broadcast"
+            aria-label="Push To Talk"
           >
-            <Mic size={24} className="center-btn-mic" />
+            <Mic size={22} className="center-btn-mic" />
             <span className="center-btn-text">
-              {isTalking ? 'LIVE' : 'TALK'}
+              PUSH TO TALK
             </span>
           </button>
         </div>

@@ -141,6 +141,63 @@ class SoundEngine {
       });
     } catch (_) {}
   }
+
+  /**
+   * Fast tape rewind sound effect
+   */
+  public playRewind() {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    try {
+      const t = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(2400, t);
+      osc.frequency.exponentialRampToValueAtTime(300, t + 0.18);
+
+      gain.gain.setValueAtTime(0.08, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.18);
+    } catch (_) {}
+  }
+
+  /**
+   * Speed toggle beep
+   */
+  public playSpeedToggle(speed: number) {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    try {
+      const t = ctx.currentTime;
+      const freq = speed === 2 ? 1600 : 1000;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, t);
+      osc.frequency.setValueAtTime(freq * 1.2, t + 0.04);
+
+      gain.gain.setValueAtTime(0.12, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.1);
+    } catch (_) {}
+  }
 }
 
 export const sound = new SoundEngine();

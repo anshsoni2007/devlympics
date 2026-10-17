@@ -531,15 +531,15 @@
   bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 18px;
-  line-height: 0.5;
+  font-size: 13px;
+  line-height: 1;
 }
 .wheel-label-bottom:hover {
   transform: translateX(-50%) scale(1.08);
 }
 
 .wheel-label-left {
-  left: 14px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -548,7 +548,7 @@
 }
 
 .wheel-label-right {
-  right: 14px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -571,12 +571,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
   cursor: pointer;
   outline: none;
   color: #3f3f3a;
   transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 5;
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .wheel-center-btn:hover {
@@ -607,10 +609,13 @@
 
 .center-btn-text {
   font-family: 'VT323', monospace;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  text-align: center;
+  line-height: 1.05;
+  max-width: 82px;
 }
 
 /* Chassis Bottom Caption (Matches reference image) */
