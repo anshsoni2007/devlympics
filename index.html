@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swar — Turn Barriers into Shared Experiences</title>
+  <meta name="description" content="Swar connects two disconnected sides across expertise, physical ability, language, and environments. An intuitive translator and bridge turning barriers into shared experiences.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="main-nav">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" aria-label="Swar Home">
+        <svg class="brand-mark" width="28" height="28" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" fill="var(--ink)" />
+          <path d="M13 20C13 16.134 16.134 13 20 13C23.866 13 27 16.134 27 20C27 23.866 23.866 27 20 27" stroke="var(--cream)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="20" cy="20" r="3.5" fill="var(--clay)"/>
+          <circle cx="28" cy="12" r="2.5" fill="var(--olive-light)"/>
+        </svg>
+        <span class="brand-text">SWAR</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#how-it-works" class="nav-link">How it works</a>
+        <a href="#impact" class="nav-link">Impact</a>
+        <a href="#app" class="nav-link">App</a>
+        <a href="#faqs" class="nav-link">FAQs</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#download" class="btn btn-pill-dark">
+          <span>Download APK · placeholder</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="eyebrow-tag">
+            <span>A MORE CONNECTED WAY FORWARD</span>
+          </div>
+          <h1 class="hero-title">
+            Turn barriers into<br>shared experiences.
+          </h1>
+          <p class="hero-description">
+            Swar helps two sides understand each other. It acts as a translator and intuitive interface, making interaction feel possible where communication once felt difficult.
+          </p>
+          <div class="hero-ctas">
+            <a href="#download" class="btn btn-pill-dark">
+              <span>Download APK · placeholder</span>
+            </a>
+            <a href="#how-it-works" class="btn btn-pill-outline">
+              <span>Explore how it works</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO GRAPHIC: 2 SIDES ONE SHARED SPACE ANIMATION -->
+        <div class="hero-visual-card-wrap">
+          <div class="hero-canvas-card" id="shared-space-card">
+            <!-- Animated decorative dots -->
+            <div class="canvas-floating-dots" aria-hidden="true">
+              <span class="canvas-dot dot-clay dot-1"></span>
+              <span class="canvas-dot dot-olive dot-2"></span>
+              <span class="canvas-dot dot-clay-light dot-3"></span>
+            </div>
+
+            <!-- Two Sides Graphics with Connecting Arch & Pulse -->
+            <div class="two-sides-scene">
+              <!-- Left Side: Terracotta Blob -->
+              <div class="side-blob blob-left" id="side-blob-a" title="Side A: One perspective">
+                <span class="blob-caption">Side A</span>
+                <div class="pulse-ring"></div>
+              </div>
+
+              <!-- Animated Connecting Bridge / Arch -->
+              <div class="bridge-container">
+                <svg class="bridge-arch-svg" viewBox="0 0 220 90" fill="none" preserveAspectRatio="none">
+                  <path class="bridge-path-base" d="M 20 85 C 35 15, 185 15, 200 85" stroke="var(--cream)" stroke-width="28" stroke-linecap="round" />
+                  <path class="bridge-path-glow" d="M 20 85 C 35 15, 185 15, 200 85" stroke="rgba(255,255,255,0.7)" stroke-width="12" stroke-linecap="round" />
+                  <!-- Flowing communication particle -->
+                  <circle class="bridge-particle" r="6" fill="var(--clay)">
+                    <animateMotion path="M 20 85 C 35 15, 185 15, 200 85" dur="3.2s" repeatCount="indefinite" />
+                  </circle>
+                  <circle class="bridge-particle-reverse" r="5" fill="var(--olive-light)">
+                    <animateMotion path="M 200 85 C 185 15, 35 15, 20 85" dur="3.6s" repeatCount="indefinite" />
+                  </circle>
+                </svg>
+              </div>
+
+              <!-- Right Side: Olive Blob -->
+              <div class="side-blob blob-right" id="side-blob-b" title="Side B: The other perspective">
+                <span class="blob-caption">Side B</span>
+                <div class="pulse-ring"></div>
+              </div>
+            </div>
+
+            <!-- Interactive Bridge Badge / Trigger -->
+            <div class="shared-space-badge" id="shared-space-pill" role="button" tabindex="0" title="Click to trigger connection pulse">
+              <span class="pulse-dot"></span>
+              <span>Two sides. One shared space.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: WHAT BRINGS US TOGETHER -->
+    <section class="section section-pillars" id="impact">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow-tag">
+            <span>WHAT BRINGS US TOGETHER</span>
+          </div>
+          <h2 class="section-title">Designed to connect.</h2>
+          <p class="section-subtitle">
+            Different needs should not mean disconnected experiences.
+          </p>
+        </div>
+
+        <div class="pillar-cards-grid">
+          <!-- Card 1: Expertise -->
+          <div class="pillar-card" tabindex="0">
+            <div class="pillar-icon-badge badge-clay">
+              <span class="pillar-letter">O</span>
+            </div>
+            <h3 class="pillar-title">Across expertise</h3>
+            <p class="pillar-copy">Make unfamiliar tools and ideas easier to approach.</p>
+            <div class="pillar-hint">Translates technical nuance into clear intuition</div>
+          </div>
+
+          <!-- Card 2: Ability -->
+          <div class="pillar-card" tabindex="0">
+            <div class="pillar-icon-badge badge-olive">
+              <span class="pillar-letter">O</span>
+            </div>
+            <h3 class="pillar-title">Across ability</h3>
+            <p class="pillar-copy">Create room for different ways of interacting.</p>
+            <div class="pillar-hint">Haptic, visual, voice & auditory modalities</div>
+          </div>
+
+          <!-- Card 3: Languages -->
+          <div class="pillar-card" tabindex="0">
+            <div class="pillar-icon-badge badge-clay">
+              <span class="pillar-letter">O</span>
+            </div>
+            <h3 class="pillar-title">Across languages</h3>
+            <p class="pillar-copy">Help meaning travel beyond familiar words.</p>
+            <div class="pillar-hint">Preserving emotional nuance & contextual tone</div>
+          </div>
+
+          <!-- Card 4: Environments -->
+          <div class="pillar-card" tabindex="0">
+            <div class="pillar-icon-badge badge-olive">
+              <span class="pillar-letter">O</span>
+            </div>
+            <h3 class="pillar-title">Across environments</h3>
+            <p class="pillar-copy">Bridge digital, physical, and resource gaps.</p>
+            <div class="pillar-hint">Low-bandwidth resilience & local device speed</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: HOW SWAR WORKS (A SIMPLE IDEA) -->
+    <section class="section section-how-it-works" id="how-it-works">
+      <div class="container how-grid">
+        <div class="how-text-side">
+          <div class="eyebrow-tag">
+            <span>A SIMPLE IDEA</span>
+          </div>
+          <h2 class="section-title">How Swar works.</h2>
+          <p class="section-subtitle">
+            A thoughtful layer between people, information, and the ways we interact.
+          </p>
+
+          <div class="step-cards-stack">
+            <!-- Step 1 -->
+            <div class="step-card active" data-step="1" role="button" tabindex="0">
+              <div class="step-number">01</div>
+              <div class="step-info">
+                <h3 class="step-heading">Translate</h3>
+                <p class="step-desc">Present meaning in a way the other side can approach.</p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card" data-step="2" role="button" tabindex="0">
+              <div class="step-number">02</div>
+              <div class="step-info">
+                <h3 class="step-heading">Adapt</h3>
+                <p class="step-desc">Make the interaction feel more intuitive for different needs.</p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card" data-step="3" role="button" tabindex="0">
+              <div class="step-number">03</div>
+              <div class="step-info">
+                <h3 class="step-heading">Connect</h3>
+                <p class="step-desc">Create space for a shared experience.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concept Interface Mockup -->
+        <div class="how-interactive-side">
+          <div class="concept-board-frame">
+            <div class="concept-interface-card">
+              <div class="concept-header">
+                <span class="concept-title">Swar / concept interface</span>
+                <span class="concept-status-dot"></span>
+              </div>
+
+              <!-- Interactive dual side simulator -->
+              <div class="concept-panes-row">
+                <!-- One side -->
+                <div class="concept-pane pane-one" id="pane-side-a">
+                  <div class="pane-label-row">
+                    <span class="pane-name">One side</span>
+                    <span class="pane-tag" id="side-a-tag">Input Speech</span>
+                  </div>
+                  <div class="pane-message" id="side-a-content">
+                    <p class="pane-quote">“Your bus will arrive at platform three in five minutes.”</p>
+                    <div class="pane-audio-bars">
+                      <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                  </div>
+                  <div class="pane-skeleton-lines">
+                    <div class="sk-line sk-long"></div>
+                    <div class="sk-line sk-short"></div>
+                  </div>
+                </div>
+
+                <div class="concept-connector">
+                  <span class="connector-dot"></span>
+                  <span class="connector-dot"></span>
+                </div>
+
+                <!-- Another side -->
+                <div class="concept-pane pane-another" id="pane-side-b">
+                  <div class="pane-label-row">
+                    <span class="pane-name">Another side</span>
+                    <span class="pane-tag" id="side-b-tag">Adapted Feed</span>
+                  </div>
+                  <div class="pane-message" id="side-b-content">
+                    <p class="pane-quote-hindi">“आपकी बस 5 मिनट में प्लेटफॉर्म 3 पर पहुंचेगी।”</p>
+                    <div class="haptic-pill">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5v14M7 5v14M22 8v8M2 8v8"/></svg>
+                      <span>Haptic wave confirmed</span>
+                    </div>
+                  </div>
+                  <div class="pane-skeleton-lines">
+                    <div class="sk-line sk-long"></div>
+                    <div class="sk-line sk-short"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="concept-footer">
+                <button class="concept-pill-btn" id="concept-trigger-btn">
+                  <span>A shared way to interact · concept only</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: INSIDE THE APP (MOBILE SCREENS SLIDE & TUMBLE ANIMATION) -->
+    <section class="section section-app-screens" id="app">
+      <div class="container app-screens-grid">
+        <div class="app-info-col">
+          <div class="eyebrow-tag">
+            <span>02 — INSIDE THE APP</span>
+          </div>
+          <h2 class="app-display-title">
+            One simple space.<br>
+            <span class="title-italic-accent">Many ways</span> to connect.
+          </h2>
+          <p class="app-copy">
+            Every screen is intentionally calm, clear, and flexible — so the tool adapts to you, never the other way around.
+          </p>
+
+          <!-- Interactive Screen Switcher / Animation Trigger -->
+          <div class="screen-selector-tabs" role="tablist" aria-label="Explore App Modes">
+            <button class="screen-tab active" data-target="screen-olive" role="tab" aria-selected="true">
+              <span class="tab-indicator indicator-olive"></span>
+              <span>Soundscape Live</span>
+            </button>
+            <button class="screen-tab" data-target="screen-cream" role="tab" aria-selected="false">
+              <span class="tab-indicator indicator-cream"></span>
+              <span>Live Translation</span>
+            </button>
+            <button class="screen-tab" data-target="screen-clay" role="tab" aria-selected="false">
+              <span class="tab-indicator indicator-clay"></span>
+              <span>Quick Connect</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- 3 MOBILE SCREENS SHOWCASE WITH SLIDE AND TUMBLE ANIMATION -->
+        <div class="app-phones-stage" id="phones-stage" aria-label="3 Mobile Screens">
+          <!-- PHONE 1: LEFT SCREEN (Live Translation / Cream Theme) -->
+          <div class="phone-wrapper phone-left tumble-item" id="phone-1" style="--tumble-delay: 0.12s;">
+            <div class="phone-hardware">
+              <div class="phone-notch"></div>
+              <div class="phone-screen screen-cream">
+                <div class="phone-top phone-top-dark">
+                  <div class="app-mini-brand">
+                    <svg width="18" height="18" viewBox="0 0 40 40" fill="none">
+                      <circle cx="20" cy="20" r="18" fill="var(--ink)" />
+                      <circle cx="20" cy="20" r="3.5" fill="var(--clay)"/>
+                    </svg>
+                    <span class="mini-brand-name">swar</span>
+                  </div>
+                  <div class="top-avatar-dot">A</div>
+                </div>
+
+                <div class="phone-subhead">
+                  <span class="micro-label">LIVE TRANSLATION</span>
+                  <div class="lang-pill-row">
+                    <span class="lang-name">English</span>
+                    <svg class="lang-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    <span class="lang-name">Hindi</span>
+                  </div>
+                </div>
+
+                <div class="translation-source-card">
+                  <span class="speaker-tag">SPEAKER</span>
+                  <div class="audio-waveform-mini">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <p class="source-phrase">“Where should we meet?”</p>
+                </div>
+
+                <div class="translation-result-card">
+                  <p class="hindi-phrase">हम कहाँ मिलें?</p>
+                  <button class="mini-speak-btn" aria-label="Pronounce translation">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                  </button>
+                </div>
+
+                <div class="screen-nav screen-nav-dark">
+                  <span class="active-dot"></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHONE 2: CENTER SCREEN (Soundscape Live / Olive Green Theme - From User Code) -->
+          <div class="phone-wrapper phone-center tumble-item" id="phone-2" style="--tumble-delay: 0s;">
+            <div class="phone-hardware">
+              <div class="phone-notch"></div>
+              <div class="phone-screen screen-olive">
+                <div class="phone-top phone-top-light">
+                  <span class="screen-app-name">Soundscape</span>
+                  <span class="live-pill">LIVE</span>
+                </div>
+
+                <div class="sound-orb" id="sound-orb-interactive" role="button" tabindex="0" title="Tap to test pulse">
+                  <!-- Sound Icon -->
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="orb-icon">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  </svg>
+                  <div class="orb-pulsing-rings">
+                    <span></span><span></span>
+                  </div>
+                </div>
+
+                <h3 class="screen-title">
+                  Someone is speaking
+                </h3>
+
+                <p class="screen-copy">
+                  Conversation detected nearby
+                </p>
+
+                <div class="caption-card">
+                  <span class="micro-label">LIVE CAPTION</span>
+                  <p id="live-caption-stream">
+                    “Your bus will arrive at platform three in five minutes.”
+                  </p>
+                </div>
+
+                <div class="screen-nav screen-nav-light">
+                  <span></span>
+                  <span class="active-dot"></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHONE 3: RIGHT SCREEN (Quick Connect / Terracotta Clay Theme) -->
+          <div class="phone-wrapper phone-right tumble-item" id="phone-3" style="--tumble-delay: 0.24s;">
+            <div class="phone-hardware">
+              <div class="phone-notch"></div>
+              <div class="phone-screen screen-clay-theme">
+                <div class="phone-top phone-top-light">
+                  <span>Quick Connect</span>
+                  <div class="dots-more">•••</div>
+                </div>
+
+                <h3 class="screen-title title-terracotta">
+                  How would you like to connect?
+                </h3>
+
+                <div class="connect-options-list">
+                  <div class="connect-opt-card" role="button" tabindex="0">
+                    <div class="opt-icon-bubble">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </div>
+                    <div class="opt-text">
+                      <strong class="opt-name">Visual assist</strong>
+                      <span class="opt-detail">Sight & high readability</span>
+                    </div>
+                    <svg class="opt-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </div>
+
+                  <div class="connect-opt-card" role="button" tabindex="0">
+                    <div class="opt-icon-bubble">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </div>
+                    <div class="opt-text">
+                      <strong class="opt-name">Voice assist</strong>
+                      <span class="opt-detail">Real-time sound & speech</span>
+                    </div>
+                    <svg class="opt-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </div>
+
+                  <div class="connect-opt-card" role="button" tabindex="0">
+                    <div class="opt-icon-bubble">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    </div>
+                    <div class="opt-text">
+                      <strong class="opt-name">Language assist</strong>
+                      <span class="opt-detail">Live multi-lingual flow</span>
+                    </div>
+                    <svg class="opt-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </div>
+                </div>
+
+                <div class="screen-nav screen-nav-light">
+                  <span></span>
+                  <span></span>
+                  <span class="active-dot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: QUESTIONS, ANSWERED SIMPLY (FAQS) -->
+    <section class="section section-faqs" id="faqs">
+      <div class="container faqs-grid">
+        <div class="faqs-header-col">
+          <div class="eyebrow-tag">
+            <span>03 — GOOD TO KNOW</span>
+          </div>
+          <h2 class="section-title">
+            Questions,<br>
+            <span class="title-italic-accent">answered simply.</span>
+          </h2>
+          <p class="faqs-subtitle">Still curious about Swar?</p>
+          <a href="#contact" class="link-with-arrow">
+            <span>Talk to our team</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+
+        <div class="faqs-list-col">
+          <!-- Accordion 1 (Open by default) -->
+          <div class="faq-item open" id="faq-1">
+            <button class="faq-trigger" aria-expanded="true" aria-controls="faq-ans-1">
+              <span class="faq-quote-mark" aria-hidden="true">“”</span>
+              <span class="faq-question">What is Swar designed to do?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+            </button>
+            <div class="faq-content" id="faq-ans-1">
+              <p>Swar is an accessibility-first communication layer. It helps translate information across language, ability, technical knowledge, and digital or physical environments.</p>
+            </div>
+          </div>
+
+          <!-- Accordion 2 -->
+          <div class="faq-item" id="faq-2">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-2">
+              <span class="faq-quote-mark" aria-hidden="true">“”</span>
+              <span class="faq-question">Who can use Swar?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-content" id="faq-ans-2" hidden>
+              <p>Anyone navigating situations where typical communication falters: non-native speakers, deaf or hard-of-hearing individuals, elders facing technical jargon, field workers in loud spaces, and healthcare or civic navigators bridging information gaps.</p>
+            </div>
+          </div>
+
+          <!-- Accordion 3 -->
+          <div class="faq-item" id="faq-3">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-3">
+              <span class="faq-quote-mark" aria-hidden="true">“”</span>
+              <span class="faq-question">Does Swar work offline?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-content" id="faq-ans-3" hidden>
+              <p>Yes. Swar’s core sound recognition, visual live-captions, and essential language translation operate on-device without cloud dependency, guaranteeing reliability in remote or zero-connectivity environments.</p>
+            </div>
+          </div>
+
+          <!-- Accordion 4 -->
+          <div class="faq-item" id="faq-4">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-4">
+              <span class="faq-quote-mark" aria-hidden="true">“”</span>
+              <span class="faq-question">Is the Android app free?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-content" id="faq-ans-4" hidden>
+              <p>Yes, the core companion app is 100% free and open-source for community access. Our goal is universal accessibility without paywalls or intrusive data collection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: DARK FOREST GREEN CALL TO ACTION BANNER -->
+    <section class="section-cta-dark" id="download">
+      <div class="container cta-dark-inner">
+        <div class="cta-text-side">
+          <div class="cta-eyebrow">START A NEW CONVERSATION</div>
+          <h2 class="cta-headline">
+            A world with fewer<br>
+            barriers starts <span class="cta-italic-clay">here.</span>
+          </h2>
+        </div>
+
+        <div class="cta-action-side">
+          <a href="#apk-download-modal" class="download-card-pill" id="apk-download-link">
+            <div class="download-badge-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <div class="download-text-group">
+              <span class="download-micro-text">DOWNLOAD APK</span>
+              <strong class="download-platform-name">Android</strong>
+            </div>
+            <div class="download-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer-bar">
+        <div class="container footer-content">
+          <div class="footer-brand">
+            <svg class="brand-mark-mini" width="22" height="22" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="18" fill="var(--cream)" />
+              <path d="M13 20C13 16.134 16.134 13 20 13C23.866 13 27 16.134 27 20C27 23.866 23.866 27 20 27" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="20" cy="20" r="3.5" fill="var(--clay)"/>
+            </svg>
+            <span class="footer-logo-text">swar</span>
+          </div>
+
+          <!-- Bottom floating status toast as shown in the screenshot -->
+          <div class="footer-status-pill" id="footer-toast">
+            <span class="toast-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="toast-label">Done! How does this look?</span>
+            <button class="toast-btn toast-thumbs-up" aria-label="Thumbs up">👍</button>
+            <button class="toast-btn toast-thumbs-down" aria-label="Thumbs down">👎</button>
+            <button class="toast-btn toast-close" id="close-toast" aria-label="Close notification">✕</button>
+          </div>
+
+          <div class="footer-copyright">
+            <span>©2026 Swar</span>
+          </div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Interactive Modal for APK placeholder -->
+  <dialog class="modal-dialog" id="apk-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Swar Android Companion</h3>
+        <button class="modal-close-btn" id="modal-close" aria-label="Close modal">✕</button>
+      </div>
+      <p class="modal-desc">
+        This is an interactive demonstrator representing the Swar communication bridge. The production APK connects dual-screen devices and wireless microphones in real time.
+      </p>
+      <div class="modal-specs">
+        <div class="spec-row"><span>Version:</span> <strong>v1.2.0-preview</strong></div>
+        <div class="spec-row"><span>Size:</span> <strong>14.8 MB</strong></div>
+        <div class="spec-row"><span>Platform:</span> <strong>Android 10+ (Offline Ready)</strong></div>
+      </div>
+      <button class="btn btn-pill-dark btn-full-width" id="sim-download-btn">Simulate APK Package Download</button>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
