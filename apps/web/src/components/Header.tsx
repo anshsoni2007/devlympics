@@ -88,6 +88,18 @@ export const Header: React.FC<HeaderProps> = ({
           >
             Voice Receiver
           </button>
+          <a
+            href="/?view=transceiver"
+            className="nav-link"
+            style={{
+              borderColor: 'rgba(195, 245, 59, 0.4)',
+              color: '#c3f53b',
+              fontWeight: 600
+            }}
+            title="Switch to Retro Pixel Communicator UI"
+          >
+            📟 Transceiver
+          </a>
           <button
             onClick={() => {
               onOpenDevices();

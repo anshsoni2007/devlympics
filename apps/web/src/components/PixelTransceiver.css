@@ -1,0 +1,657 @@
+/* ==========================================================================
+   SWAR Pixel Transceiver Communicator - Retro-Futuristic Hardware UI
+   ========================================================================== */
+
+:root {
+  --swar-phosphor: #c3f53b;
+  --swar-phosphor-glow: rgba(195, 245, 59, 0.65);
+  --swar-phosphor-dim: rgba(195, 245, 59, 0.35);
+  --swar-phosphor-bg: #0c140a;
+  --swar-chassis: #eae9e1;
+  --swar-chassis-dark: #d8d7cd;
+  --swar-wheel: #f2f1ea;
+  --swar-wheel-border: #c8c6bc;
+}
+
+/* Outer layout wrapper */
+.transceiver-page-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 20%, #202620 0%, #0d120d 70%, #060806 100%);
+  padding: 24px 16px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #f1f5f9;
+  user-select: none;
+}
+
+/* Top bar controls */
+.transceiver-topbar {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 10px;
+}
+
+.transceiver-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: var(--swar-phosphor);
+  text-shadow: 0 0 6px var(--swar-phosphor-glow);
+}
+
+.transceiver-nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.transceiver-nav-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   THE PHYSICAL HANDHELD DEVICE CHASSIS (Matches Reference Image)
+   ========================================================================== */
+
+.handheld-chassis {
+  width: 100%;
+  max-width: 380px;
+  background: linear-gradient(165deg, #f0efe8 0%, #e2e1d7 45%, #d5d3c8 100%);
+  border-radius: 46px;
+  padding: 24px 20px 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.65),
+    0 10px 25px rgba(0, 0, 0, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.18),
+    inset 1px 0 2px rgba(255, 255, 255, 0.6),
+    inset -1px 0 2px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+/* Top Speaker Cutout / Grill Slot */
+.chassis-speaker-slit {
+  width: 52px;
+  height: 4px;
+  background: #73736c;
+  border-radius: 3px;
+  margin-bottom: 14px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7), 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================================================
+   THE RETRO PIXELATED CRT SCREEN
+   ========================================================================== */
+
+.screen-bezel {
+  width: 100%;
+  background: #1a1e19;
+  border-radius: 20px;
+  padding: 4px;
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(255, 255, 255, 0.6);
+  border: 1px solid #141713;
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pixel-screen {
+  width: 100%;
+  height: 380px;
+  background-color: var(--swar-phosphor-bg);
+  border-radius: 16px;
+  padding: 14px 14px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  font-family: 'VT323', 'Silkscreen', 'Share Tech Mono', monospace;
+  color: var(--swar-phosphor);
+  text-shadow: 0 0 4px var(--swar-phosphor-glow);
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.9);
+}
+
+/* CRT Scanlines Overlay */
+.pixel-screen::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.42) 0px,
+    rgba(0, 0, 0, 0.42) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* CRT Vignette & Screen Reflection */
+.pixel-screen::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* Screen Top Header Bar */
+.screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  z-index: 2;
+}
+
+.screen-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.screen-brand-icon-box {
+  width: 18px;
+  height: 18px;
+  background: var(--swar-phosphor);
+  color: var(--swar-phosphor-bg);
+  font-weight: 900;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  line-height: 1;
+  text-shadow: none;
+}
+
+.screen-brand-text {
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+
+.screen-header-status {
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.status-dot-blink {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background-color: var(--swar-phosphor);
+  box-shadow: 0 0 6px var(--swar-phosphor);
+  animation: pulseBlink 1.2s infinite;
+}
+
+@keyframes pulseBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(0.85); }
+}
+
+/* Dotted Divider Lines */
+.screen-dotted-bar {
+  letter-spacing: 4px;
+  font-size: 11px;
+  opacity: 0.65;
+  text-align: center;
+  margin-bottom: 14px;
+  z-index: 2;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Status Badge Box (Exact from reference) */
+.screen-status-badge {
+  border: 1px solid var(--swar-phosphor);
+  padding: 4px 10px;
+  margin: 0 auto 16px;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  z-index: 2;
+  background: rgba(195, 245, 59, 0.05);
+  box-shadow: inset 0 0 4px rgba(195, 245, 59, 0.1);
+  max-width: 90%;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   SCREEN 1: AVAILABLE DEVICES LIST (RADAR & PEER DISCOVERY)
+   ========================================================================== */
+
+.screen-device-list-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  overflow-y: auto;
+  gap: 6px;
+  padding-right: 2px;
+}
+
+.screen-device-list-container::-webkit-scrollbar {
+  width: 3px;
+}
+
+.screen-device-list-container::-webkit-scrollbar-thumb {
+  background: var(--swar-phosphor-dim);
+}
+
+.screen-device-item {
+  border: 1px solid var(--swar-phosphor-dim);
+  background: rgba(195, 245, 59, 0.03);
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.screen-device-item:hover,
+.screen-device-item.active {
+  background: var(--swar-phosphor);
+  color: var(--swar-phosphor-bg);
+  border-color: var(--swar-phosphor);
+  text-shadow: none;
+  transform: translateX(2px);
+}
+
+.screen-device-item.active .device-transport-tag,
+.screen-device-item:hover .device-transport-tag {
+  color: var(--swar-phosphor-bg);
+}
+
+.device-left-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.device-name-text {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.device-transport-tag {
+  font-size: 11px;
+  opacity: 0.8;
+  letter-spacing: 0.04em;
+}
+
+.device-right-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.device-signal-bars {
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.device-action-hint {
+  font-size: 11px;
+  border: 1px solid currentColor;
+  padding: 1px 4px;
+  border-radius: 1px;
+}
+
+/* ==========================================================================
+   SCREEN 2 & 3: MAIN TRANSCRIPT DISPLAY BOX (Matches Reference Image)
+   ========================================================================== */
+
+.screen-transcript-box {
+  border: 1px solid var(--swar-phosphor);
+  background: rgba(195, 245, 59, 0.03);
+  padding: 10px 12px;
+  margin-top: auto;
+  margin-bottom: 12px;
+  min-height: 94px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  box-shadow: inset 0 0 6px rgba(195, 245, 59, 0.1);
+  position: relative;
+}
+
+.transcript-label-mini {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+.transcript-body-text {
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.cursor-block {
+  display: inline-block;
+  width: 9px;
+  height: 17px;
+  background-color: var(--swar-phosphor);
+  vertical-align: -2px;
+  margin-left: 4px;
+  animation: cursorBlink 0.9s steps(2, start) infinite;
+  box-shadow: 0 0 5px var(--swar-phosphor);
+}
+
+@keyframes cursorBlink {
+  to { visibility: hidden; }
+}
+
+.transcript-telemetry-meta {
+  font-size: 11px;
+  opacity: 0.75;
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   SCREEN 3: RETRO PIXEL OSCILLOSCOPE CANVAS ANIMATION
+   ========================================================================== */
+
+.screen-animation-viewport {
+  width: 100%;
+  height: 90px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixel-oscilloscope-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Dynamic Live Equalizer Bars when Talking */
+.live-eq-bars-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  height: 52px;
+  margin-bottom: 8px;
+  z-index: 2;
+}
+
+.eq-bar {
+  width: 6px;
+  background-color: var(--swar-phosphor);
+  box-shadow: 0 0 4px var(--swar-phosphor);
+  transition: height 0.08s ease;
+  min-height: 3px;
+}
+
+/* Screen Bottom Footer Bar */
+.screen-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+  z-index: 2;
+  padding-top: 4px;
+  border-top: 1px dotted var(--swar-phosphor-dim);
+}
+
+/* ==========================================================================
+   THE CLICK WHEEL & CENTER BUTTON (Matches Reference Image)
+   ========================================================================== */
+
+.click-wheel-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #fdfdfa 0%, #ebeae2 70%, #d8d6cc 100%);
+  border: 1px solid var(--swar-wheel-border);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.22),
+    0 2px 6px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 12px;
+  touch-action: manipulation;
+}
+
+/* Concentric brushed texture on outer wheel */
+.click-wheel-container::before {
+  content: " ";
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  pointer-events: none;
+}
+
+/* Embossed 4 Wheel Labels */
+.wheel-label-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #63635d;
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  padding: 6px;
+  transition: all 0.15s ease;
+  outline: none;
+}
+
+.wheel-label-btn:hover {
+  color: #111827;
+  transform: scale(1.08);
+}
+
+.wheel-label-btn:active {
+  transform: scale(0.95);
+}
+
+.wheel-label-top {
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.wheel-label-top:hover {
+  transform: translateX(-50%) scale(1.08);
+}
+
+.wheel-label-bottom {
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  line-height: 0.5;
+}
+.wheel-label-bottom:hover {
+  transform: translateX(-50%) scale(1.08);
+}
+
+.wheel-label-left {
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.wheel-label-left:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.wheel-label-right {
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.wheel-label-right:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* The Center Tactile Round Button */
+.wheel-center-btn {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 40%, #fefefe 0%, #ecebe2 60%, #dedcd1 100%);
+  border: 1px solid #bfbcb0;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  outline: none;
+  color: #3f3f3a;
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+}
+
+.wheel-center-btn:hover {
+  background: radial-gradient(circle at 45% 40%, #ffffff 0%, #f4f3ec 60%, #e2e0d5 100%);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.18),
+    inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+
+.wheel-center-btn:active,
+.wheel-center-btn.is-active {
+  transform: translateY(2px) scale(0.97);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.25);
+  background: #dedcd2;
+  color: #0f172a;
+}
+
+.wheel-center-btn.is-active .center-btn-mic {
+  color: #10b981;
+  filter: drop-shadow(0 0 6px #10b981);
+}
+
+.center-btn-mic {
+  transition: all 0.15s ease;
+}
+
+.center-btn-text {
+  font-family: 'VT323', monospace;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Chassis Bottom Caption (Matches reference image) */
+.chassis-bottom-caption {
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  color: #787870;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Quick Tactical Message Drawer / Selector */
+.tactical-phrases-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  max-width: 380px;
+  width: 100%;
+  margin-top: 14px;
+  padding: 4px;
+}
+
+.tactical-phrases-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.tactical-pill {
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tactical-pill:hover {
+  background: rgba(195, 245, 59, 0.15);
+  border-color: var(--swar-phosphor);
+  color: var(--swar-phosphor);
+}

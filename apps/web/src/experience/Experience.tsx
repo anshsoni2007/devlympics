@@ -20,7 +20,7 @@ import { PushToTalk } from './PushToTalk';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Navigation() {
+function Navigation({ onSwitchView }: { onSwitchView?: (view: 'transceiver' | 'experience' | 'studio') => void }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLButtonElement>(null);
 
@@ -52,15 +52,34 @@ function Navigation() {
           <a href="#faq">FAQ</a>
         </nav>
 
-        <a
-          className="nav-apk-btn"
-          href={DEFAULT_APK_DOWNLOAD_URL}
-          download={DEFAULT_APK_DOWNLOAD_URL.startsWith('/') ? 'swar-debug.apk' : undefined}
-          title="Download SWAR Android APK"
-        >
-          <ArrowDown size={15} strokeWidth={2.5} />
-          <span>Download APK</span>
-        </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {onSwitchView && (
+            <button
+              onClick={() => onSwitchView('transceiver')}
+              className="nav-apk-btn"
+              style={{
+                backgroundColor: '#c3f53b',
+                color: '#0c140a',
+                borderColor: '#c3f53b',
+                cursor: 'pointer',
+                fontWeight: 700
+              }}
+              title="Open Retro Pixel Handheld Communicator"
+            >
+              <span>📟 Communicator</span>
+            </button>
+          )}
+
+          <a
+            className="nav-apk-btn"
+            href={DEFAULT_APK_DOWNLOAD_URL}
+            download={DEFAULT_APK_DOWNLOAD_URL.startsWith('/') ? 'swar-debug.apk' : undefined}
+            title="Download SWAR Android APK"
+          >
+            <ArrowDown size={15} strokeWidth={2.5} />
+            <span>Download APK</span>
+          </a>
+        </div>
 
         <button
           ref={menuRef}
@@ -823,7 +842,7 @@ function SiteFooter() {
   );
 }
 
-export function Experience() {
+export function Experience({ onSwitchView }: { onSwitchView?: (view: 'transceiver' | 'experience' | 'studio') => void } = {}) {
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -856,7 +875,7 @@ export function Experience() {
             Discover the Android App <ArrowRight size={13} />
           </a>
         </div>
-        <Navigation />
+        <Navigation onSwitchView={onSwitchView} />
         <main>
           <Hero />
           <TechnologySection />
